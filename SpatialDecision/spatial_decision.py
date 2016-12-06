@@ -45,8 +45,6 @@ except ImportError, e:
     has_pydevd = False
     is_debug = False
 
-if has_pydevd and is_debug:
-    pydevd.settrace('localhost', port=53100, stdoutToServer=True, stderrToServer=True, suspend=False)
 
 class SpatialDecision:
     """QGIS Plugin Implementation."""
@@ -87,6 +85,8 @@ class SpatialDecision:
         self.toolbar.setObjectName(u'SpatialDecision')
 
         #print "** INITIALIZING SpatialDecision"
+        if has_pydevd and is_debug:
+            pydevd.settrace('localhost', port=53100, stdoutToServer=True, stderrToServer=True, suspend=False)
 
         self.pluginIsActive = False
         self.dockwidget = None
