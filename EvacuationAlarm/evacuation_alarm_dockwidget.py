@@ -3,12 +3,12 @@
 /***************************************************************************
  EvacuationAlarmDockWidget
                                  A QGIS plugin
- This plugin helps policemen in deciding on which buildings to evacuate in case of smoke caused by fire
+ This plugin helps policemen to decide on which buildings to evacuate in case of smoke caused by fire
                              -------------------
         begin                : 2016-12-14
         git sha              : $Format:%H$
-        copyright            : (C) 2016 by TU Delft
-        email                : noortjevaissier@gmail.com
+        copyright            : (C) 2016 by TU Delft Geomatics
+        email                : rflteeuwen@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,7 +27,7 @@ from PyQt4 import QtGui, uic
 from PyQt4.QtCore import pyqtSignal
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'aeacuation_alarm_dockwidget_base.ui'))
+    os.path.dirname(__file__), 'evacuation_alarm_dockwidget_base.ui'))
 
 
 class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):

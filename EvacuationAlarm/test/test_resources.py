@@ -8,9 +8,9 @@
 
 """
 
-__author__ = 'noortjevaissier@gmail.com'
+__author__ = 'rflteeuwen@gmail.com'
 __date__ = '2016-12-14'
-__copyright__ = 'Copyright 2016, TU Delft'
+__copyright__ = 'Copyright 2016, TU Delft Geomatics'
 
 import unittest
 

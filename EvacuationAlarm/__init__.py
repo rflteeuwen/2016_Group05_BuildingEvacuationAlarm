@@ -3,11 +3,11 @@
 /***************************************************************************
  EvacuationAlarm
                                  A QGIS plugin
- This plugin helps policemen in deciding on which buildings to evacuate in case of smoke caused by fire
+ This plugin helps policemen to decide on which buildings to evacuate in case of smoke caused by fire
                              -------------------
         begin                : 2016-12-14
-        copyright            : (C) 2016 by TU Delft
-        email                : noortjevaissier@gmail.com
+        copyright            : (C) 2016 by TU Delft Geomatics
+        email                : rflteeuwen@gmail.com
         git sha              : $Format:%H$
  ***************************************************************************/
 
@@ -31,5 +31,5 @@ def classFactory(iface):  # pylint: disable=invalid-name
     :type iface: QgsInterface
     """
     #
-    from .aeacuation_alarm import EvacuationAlarm
+    from .evacuation_alarm import EvacuationAlarm
     return EvacuationAlarm(iface)

@@ -1,10 +1,10 @@
 Plugin Builder Results
 
 Your plugin EvacuationAlarm was created in:
-    C:\Users\tudelft\Documents\Geomatics\GEO1005 Spatial decision support systems\2016_Group05_BuildingEvacuationAlarm\EvacuationAlarm\EvacuationAlarm
+    C:\Users\rflte\Documents\TU Delft NOG SELECTEREN\Master Geomatics\GEO1005 SDSS for Planning and Crisis Management\2016_Group05_BuildingEvacuationAlarm\EvacuationAlarm
 
 Your QGIS plugin directory is located at:
-    C:/Users/tudelft/.qgis2/python/plugins
+    C:/Users/rflte/.qgis2/python/plugins
 
 What's Next:
 
@@ -17,7 +17,7 @@ What's Next:
 
   * Test the plugin by enabling it in the QGIS plugin manager
 
-  * Customize it by editing the implementation file: ``aeacuation_alarm.py``
+  * Customize it by editing the implementation file: ``evacuation_alarm.py``
 
   * Create your own custom icon, replacing the default icon.png
 

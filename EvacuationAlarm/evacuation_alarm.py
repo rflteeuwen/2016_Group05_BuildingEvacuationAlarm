@@ -3,12 +3,12 @@
 /***************************************************************************
  EvacuationAlarm
                                  A QGIS plugin
- This plugin helps policemen in deciding on which buildings to evacuate in case of smoke caused by fire
+ This plugin helps policemen to decide on which buildings to evacuate in case of smoke caused by fire
                               -------------------
         begin                : 2016-12-14
         git sha              : $Format:%H$
-        copyright            : (C) 2016 by TU Delft
-        email                : noortjevaissier@gmail.com
+        copyright            : (C) 2016 by TU Delft Geomatics
+        email                : rflteeuwen@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,7 +26,7 @@ from PyQt4.QtGui import QAction, QIcon
 import resources
 
 # Import the code for the DockWidget
-from aeacuation_alarm_dockwidget import EvacuationAlarmDockWidget
+from evacuation_alarm_dockwidget import EvacuationAlarmDockWidget
 import os.path
 
 
@@ -170,7 +170,7 @@ class EvacuationAlarm:
         icon_path = ':/plugins/EvacuationAlarm/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr(u''),
+            text=self.tr(u'Evacuation Alarm'),
             callback=self.run,
             parent=self.iface.mainWindow())
 

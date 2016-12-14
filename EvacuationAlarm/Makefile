@@ -1,12 +1,12 @@
 #/***************************************************************************
 # EvacuationAlarm
 #
-# This plugin helps policemen in deciding on which buildings to evacuate in case of smoke caused by fire
+# This plugin helps policemen to decide on which buildings to evacuate in case of smoke caused by fire
 #							 -------------------
 #		begin				: 2016-12-14
 #		git sha				: $Format:%H$
-#		copyright			: (C) 2016 by TU Delft
-#		email				: noortjevaissier@gmail.com
+#		copyright			: (C) 2016 by TU Delft Geomatics
+#		email				: rflteeuwen@gmail.com
 # ***************************************************************************/
 #
 #/***************************************************************************
@@ -38,15 +38,15 @@ LOCALES =
 # translation
 SOURCES = \
 	__init__.py \
-	aeacuation_alarm.py aeacuation_alarm_dockwidget.py
+	evacuation_alarm.py evacuation_alarm_dockwidget.py
 
 PLUGINNAME = EvacuationAlarm
 
 PY_FILES = \
 	__init__.py \
-	aeacuation_alarm.py aeacuation_alarm_dockwidget.py
+	evacuation_alarm.py evacuation_alarm_dockwidget.py
 
-UI_FILES = aeacuation_alarm_dockwidget_base.ui
+UI_FILES = evacuation_alarm_dockwidget_base.ui
 
 EXTRAS = metadata.txt icon.png
 

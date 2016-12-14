@@ -9,12 +9,12 @@
 [general]
 name=Evacuation Alarm
 qgisMinimumVersion=2.0
-description=This plugin helps policemen in deciding on which buildings to evacuate in case of smoke caused by fire
+description=This plugin helps policemen to decide on which buildings to evacuate in case of smoke caused by fire
 version=0.1
-author=TU Delft
-email=noortjevaissier@gmail.com
+author=TU Delft Geomatics
+email=rflteeuwen@gmail.com
 
-about=This plugin helps policemen in deciding on which buildings to evacuate in case of smoke caused by fire
+about=This plugin helps policemen to decide on which buildings to evacuate in case of smoke caused by fire. The plugin is aimed at the city centre of Rotterdam, the Netherlands.
 
 tracker=https://github.com/rflteeuwen/2016_Group05_BuildingEvacuationAlarm
 repository=https://github.com/rflteeuwen/2016_Group05_BuildingEvacuationAlarm
