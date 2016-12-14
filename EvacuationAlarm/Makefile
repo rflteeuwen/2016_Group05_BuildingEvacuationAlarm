@@ -5,8 +5,8 @@
 #							 -------------------
 #		begin				: 2016-12-14
 #		git sha				: $Format:%H$
-#		copyright			: (C) 2016 by TUDelft
-#		email				: rflteeuwen@gmail.com
+#		copyright			: (C) 2016 by TU Delft
+#		email				: noortjevaissier@gmail.com
 # ***************************************************************************/
 #
 #/***************************************************************************
@@ -38,15 +38,15 @@ LOCALES =
 # translation
 SOURCES = \
 	__init__.py \
-	evacuation_alarm.py evacuation_alarm_dialog.py
+	aeacuation_alarm.py aeacuation_alarm_dockwidget.py
 
 PLUGINNAME = EvacuationAlarm
 
 PY_FILES = \
 	__init__.py \
-	evacuation_alarm.py evacuation_alarm_dialog.py
+	aeacuation_alarm.py aeacuation_alarm_dockwidget.py
 
-UI_FILES = evacuation_alarm_dialog_base.ui
+UI_FILES = aeacuation_alarm_dockwidget_base.ui
 
 EXTRAS = metadata.txt icon.png
 

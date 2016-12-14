@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- EvacuationAlarmDialog
+ SpatialDecision
                                  A QGIS plugin
- This plugin helps policemen in deciding on which buildings to evacuate in case of smoke caused by fire
+ This is a SDSS template for the GEO1005 course
                              -------------------
-        begin                : 2016-12-14
+        begin                : 2015-11-02
+        copyright            : (C) 2015 by Jorge Gil, TU Delft
+        email                : j.a.lopesgil@tudelft.nl
         git sha              : $Format:%H$
-        copyright            : (C) 2016 by TUDelft
-        email                : rflteeuwen@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,23 +19,17 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
 
-import os
 
-from PyQt4 import QtGui, uic
+# noinspection PyPep8Naming
+def classFactory(iface):  # pylint: disable=invalid-name
+    """Load SpatialDecision class from file SpatialDecision.
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'evacuation_alarm_dialog_base.ui'))
-
-
-class EvacuationAlarmDialog(QtGui.QDialog, FORM_CLASS):
-    def __init__(self, parent=None):
-        """Constructor."""
-        super(EvacuationAlarmDialog, self).__init__(parent)
-        # Set up the user interface from Designer.
-        # After setupUI you can access any designer object by doing
-        # self.<objectname>, and you can use autoconnect slots - see
-        # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
-        # #widgets-and-dialogs-with-auto-connect
-        self.setupUi(self)
+    :param iface: A QGIS interface instance.
+    :type iface: QgsInterface
+    """
+    #
+    from .spatial_decision import SpatialDecision
+    return SpatialDecision(iface)

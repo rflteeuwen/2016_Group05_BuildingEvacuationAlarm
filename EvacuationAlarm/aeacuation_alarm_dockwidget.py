@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- EvacuationAlarm
+ EvacuationAlarmDockWidget
                                  A QGIS plugin
  This plugin helps policemen in deciding on which buildings to evacuate in case of smoke caused by fire
                              -------------------
         begin                : 2016-12-14
+        git sha              : $Format:%H$
         copyright            : (C) 2016 by TU Delft
         email                : noortjevaissier@gmail.com
-        git sha              : $Format:%H$
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,17 +19,32 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
- This script initializes the plugin, making it known to QGIS.
 """
 
+import os
 
-# noinspection PyPep8Naming
-def classFactory(iface):  # pylint: disable=invalid-name
-    """Load EvacuationAlarm class from file EvacuationAlarm.
+from PyQt4 import QtGui, uic
+from PyQt4.QtCore import pyqtSignal
 
-    :param iface: A QGIS interface instance.
-    :type iface: QgsInterface
-    """
-    #
-    from .aeacuation_alarm import EvacuationAlarm
-    return EvacuationAlarm(iface)
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
+    os.path.dirname(__file__), 'aeacuation_alarm_dockwidget_base.ui'))
+
+
+class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
+
+    closingPlugin = pyqtSignal()
+
+    def __init__(self, parent=None):
+        """Constructor."""
+        super(EvacuationAlarmDockWidget, self).__init__(parent)
+        # Set up the user interface from Designer.
+        # After setupUI you can access any designer object by doing
+        # self.<objectname>, and you can use autoconnect slots - see
+        # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
+        # #widgets-and-dialogs-with-auto-connect
+        self.setupUi(self)
+
+    def closeEvent(self, event):
+        self.closingPlugin.emit()
+        event.accept()
+
