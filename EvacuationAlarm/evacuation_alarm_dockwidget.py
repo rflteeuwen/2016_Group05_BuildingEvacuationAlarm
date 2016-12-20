@@ -48,6 +48,16 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.iface = iface
         self.canvas = self.iface.mapCanvas()
 
+        # test
+        self.chemicals_yes.clicked.connect(self.print_yes)
+        self.chemicals_no.clicked.connect(self.print_no)
+
+    def print_yes(self):
+        print 'chemicals'
+
+    def print_no(self):
+        print 'no chemicals'
+
     def closeEvent(self, event):
         self.closingPlugin.emit()
         event.accept()
