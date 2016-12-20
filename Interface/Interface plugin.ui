@@ -29,6 +29,12 @@
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
          <widget class="QLabel" name="calculate_header">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
            <string>CALCULATION</string>
           </property>
@@ -97,7 +103,7 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="Chemicals">
             <property name="text">
              <string>Chemicals</string>
             </property>
@@ -115,10 +121,10 @@
         <item>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="2" column="0">
-           <widget class="QSpinBox" name="spinBox"/>
+           <widget class="QSpinBox" name="intensityfire_input"/>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_5">
+           <widget class="QLabel" name="intensityfire">
             <property name="text">
              <string>Intensity fire</string>
             </property>
@@ -127,7 +133,39 @@
          </layout>
         </item>
         <item>
-         <widget class="QTimeEdit" name="timeEdit"/>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <widget class="QLabel" name="winddirection">
+            <property name="text">
+             <string>wind direction</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="winddirection_input">
+            <property name="editable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QLabel" name="windintensity">
+            <property name="text">
+             <string>Wind intensity</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="windintensity_input"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTimeEdit" name="time"/>
         </item>
        </layout>
       </item>
