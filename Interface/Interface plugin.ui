@@ -64,31 +64,6 @@
         <item>
          <widget class="QSpinBox" name="nr_policeman_input"/>
         </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QPushButton" name="affected_buildings">
-            <property name="text">
-             <string>Affected buildings</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="police_force">
-            <property name="text">
-             <string>Police force</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="policeman_alarm">
-            <property name="text">
-             <string>Policeman alarm</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
        </layout>
       </item>
       <item>
@@ -166,6 +141,31 @@
         </item>
         <item>
          <widget class="QTimeEdit" name="time"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="affected_buildings">
+          <property name="text">
+           <string>Affected buildings</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="police_force">
+          <property name="text">
+           <string>Police force</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="policeman_alarm">
+          <property name="text">
+           <string>Policeman alarm</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
