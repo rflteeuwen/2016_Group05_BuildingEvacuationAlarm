@@ -140,7 +140,7 @@ class EvacuationAlarm:
         :rtype: QAction
         """
 
-        icon = QIcon(icon_path)
+        icon = QIcon(os.path.dirname(__file__) + "/icon.png")
         action = QAction(icon, text, parent)
         action.triggered.connect(callback)
         action.setEnabled(enabled_flag)
