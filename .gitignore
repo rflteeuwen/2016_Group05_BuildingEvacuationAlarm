@@ -1,2 +1,4 @@
-
-*.qgs~
+.DS_Store
+.idea
+.workspace.xml
+*.pyc
