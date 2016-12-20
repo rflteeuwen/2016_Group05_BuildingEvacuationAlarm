@@ -44,6 +44,29 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 
+        # Define globals
+        self.iface = iface
+        self.canvas = self.iface.mapCanvas()
+
+        #location
+        self.location_input.clicked
+
+        #Number of policeman
+
+        #Chemicals
+        self.chemicals_yes.clicked.connect(self.print_function)
+
+        #Wind
+
+        #Calculation buttons
+
+    def print_function(self):
+        print 'hi'
+
+
+
+
+
     def closeEvent(self, event):
         self.closingPlugin.emit()
         event.accept()
