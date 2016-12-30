@@ -29,6 +29,7 @@ from qgis.core import *
 from qgis.gui import *
 from PyQt4.QtCore import *
 from PyQt4 import QtGui
+from PyQt4.QtGui import QLineEdit
 import os, sys
 import qgis
 
@@ -54,18 +55,30 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.iface = iface
         self.canvas = self.iface.mapCanvas()
 
-        # test
+        # start
+        self.start.clicked.connect(self.loadProject)
+
+        # fire data
         self.chemicals_yes.clicked.connect(self.print_yes)
         self.chemicals_no.clicked.connect(self.print_no)
-        self.start.clicked.connect(self.loadLayers)
+        self.affected_buildings.clicked.connect(self.show_location)
+
+
+
+
 
     def print_yes(self):
-        print 'chemicals'
+        self.fire_chemicals_output.setHtml("Chemicals present")
 
     def print_no(self):
-        print 'no chemicals'
+        self.fire_chemicals_output.setHtml("No chemicals present")
 
-    def loadLayers(self):
+    def show_location(self):
+        pass
+
+
+
+    def loadProject(self):
 
 
         # create Qt widget
@@ -76,18 +89,16 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         canvas.enableAntiAliasing(True)
 
         # not updated US6SP10M files from ENC_ROOT
-        #source_dir = "C:\sample_data"
-
         plugin_dir = os.path.dirname(__file__)
         source_dir = plugin_dir + '/sample_data/backgroundDataProject.qgs'
 
-        #canvas_layers = []
-
+        # read project
         project = QgsProject.instance()
         project.read(QFileInfo(source_dir))
 
         # old version: loading layers separately
-        ''''# load vector layers
+        '''# canvas_layers = []
+        # load vector layers
         for files in os.listdir(source_dir):
 
             # load only the shapefiles

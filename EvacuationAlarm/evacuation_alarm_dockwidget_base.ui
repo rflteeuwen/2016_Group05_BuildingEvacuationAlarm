@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1116</width>
-    <height>1002</height>
+    <width>2091</width>
+    <height>1320</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>905</width>
-     <height>894</height>
+     <width>1071</width>
+     <height>1334</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -28,7 +28,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QLabel" name="calculate_header">
+         <widget class="QLabel" name="calculate_header_3">
           <property name="font">
            <font>
             <weight>75</weight>
@@ -36,7 +36,20 @@
            </font>
           </property>
           <property name="text">
-           <string>CALCULATION</string>
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="calculate_header_2">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>START</string>
           </property>
          </widget>
         </item>
@@ -77,30 +90,36 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QPushButton" name="chemicals_yes">
             <property name="text">
              <string>Yes</string>
             </property>
             <property name="checkable">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="Chemicals">
-            <property name="text">
-             <string>Chemicals</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
+          <item row="2" column="1">
            <widget class="QPushButton" name="chemicals_no">
             <property name="text">
              <string>No</string>
             </property>
             <property name="checkable">
-             <bool>true</bool>
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="fire_location_name_2">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Chemicals</string>
             </property>
            </widget>
           </item>
@@ -158,119 +177,381 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="calculate_header">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>CALCULATION</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QPushButton" name="affected_buildings">
           <property name="text">
-           <string>Affected buildings</string>
+           <string>1. Affected buildings</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="police_force">
           <property name="text">
-           <string>Police force</string>
+           <string>2. Police force</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="policeman_alarm">
           <property name="text">
-           <string>Policeman alarm</string>
+           <string>3. Policeman alarm</string>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="calculate_header_4">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>GENERAL INFORMATION</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="general_information_header">
-          <property name="text">
-           <string>GENERAL INFORMATION</string>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="leftMargin">
+           <number>1</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="Fire_location_label">
-          <property name="text">
-           <string>Fire location:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="Fire_intensity_label">
-          <property name="text">
-           <string>Fire intensity:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="fire_chemicals_label">
-          <property name="text">
-           <string>Fire chemicals:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="affected_buildings_label">
-          <property name="text">
-           <string>Affected buildings:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="nr_affected_people_label">
-          <property name="text">
-           <string>Nr of affected people:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="nr_of_policeman_label">
-          <property name="text">
-           <string>Nr of policeman needed:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QLabel" name="Building_information_header">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="fire_location_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
             <property name="text">
-             <string>BUILDING INFORMATION</string>
+             <string>Fire location:</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLabel" name="building_type_label">
-            <property name="text">
-             <string>Building type:</string>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="fire_location_output">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLabel" name="nr_people_inside_label_buildinginfo">
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <property name="leftMargin">
+           <number>1</number>
+          </property>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="fire_intensity_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
             <property name="text">
-             <string>Nr of people inside:</string>
+             <string>Fire intensity:</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLabel" name="vulnerability_label">
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="fire_intensity_output">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <property name="leftMargin">
+           <number>1</number>
+          </property>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="fire_chemicals_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Fire chemicals:</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="fire_chemicals_output">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="leftMargin">
+           <number>1</number>
+          </property>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="affected_buildings_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>No. of affected buildings:</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="affected_buildings_output">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <property name="leftMargin">
+           <number>1</number>
+          </property>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="policemen_needed_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>No. of policemen needed:</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="policemen_needed_output">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="leftMargin">
+           <number>1</number>
+          </property>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="affected_people_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>No. of affected people:</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="affected_people_output">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="calculate_header_5">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>BUILDING INFORMATION</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="no_people_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>No. of people inside:</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="no_people_output">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="vulnerability_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
             <property name="text">
              <string>Vulnerability:</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLabel" name="vulnerability_label_buildinginfo">
-            <property name="text">
-             <string>Nr of policeman needed:</string>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="vulnerability_output">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
             </property>
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="policemen_needed_name_2">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>No. of policemen needed:</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="policemen_needed_output_2">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="building_type_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Building type:</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="building_type_output">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="no_people_name_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
