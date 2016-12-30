@@ -76,7 +76,11 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         canvas.enableAntiAliasing(True)
 
         # not updated US6SP10M files from ENC_ROOT
-        source_dir = "C:\sample_data"
+        #source_dir = "C:\sample_data"
+
+        plugin_dir = os.path.dirname(__file__)
+        source_dir = plugin_dir + '/sample_data'
+        print source_dir
 
         canvas_layers = []
 
