@@ -79,17 +79,20 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         #source_dir = "C:\sample_data"
 
         plugin_dir = os.path.dirname(__file__)
-        source_dir = plugin_dir + '/sample_data'
-        print source_dir
+        source_dir = plugin_dir + '/sample_data/backgroundDataProject.qgs'
 
-        canvas_layers = []
+        #canvas_layers = []
 
-        # load vector layers
+        project = QgsProject.instance()
+        project.read(QFileInfo(source_dir))
+
+        # old version: loading layers separately
+        ''''# load vector layers
         for files in os.listdir(source_dir):
 
             # load only the shapefiles
-            if files.endswith(".shp"):
-                vlayer = QgsVectorLayer(source_dir + "/" + files, files, "ogr")
+            if files.endswith(".qgs"):
+                vproject = QgsProject(source_dir)
 
                 # add layer to the registry
                 QgsMapLayerRegistry.instance().addMapLayer(vlayer)
@@ -101,7 +104,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         canvas.setLayerSet(canvas_layers)
         canvas.refresh()
-        canvas.show()
+        canvas.show()'''
 
 
 
