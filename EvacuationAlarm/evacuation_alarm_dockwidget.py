@@ -89,28 +89,32 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # to implement: we allow only one feature at a time to be selected
 
-        for item in selected:
-            attrs = item.attributes()
+        if len(selected) > 1:
+            self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.CRITICAL, duration = 3)
+        else:
 
-            people = attrs[22]
-            policemen = int(people / 10)
-            function = attrs[17]
+            for item in selected:
+                attrs = item.attributes()
 
-            funct_list = ["hospital", "doctors", "fire_station", "kindergarten", "nursing_home", "police", "school"]
+                people = attrs[22]
+                policemen = int(people / 10)
+                function = attrs[17]
 
-            if function in funct_list:
-                vulnerability = "Vulnerable!"
-            else:
-                function = "Not of particular interest"
-                vulnerability = "Not vulnerable"
+                funct_list = ["hospital", "doctors", "fire_station", "kindergarten", "nursing_home", "police", "school"]
 
-            if policemen < 1:
-                policemen = 1
+                if function in funct_list:
+                    vulnerability = "Vulnerable!"
+                else:
+                    function = "Not of particular interest"
+                    vulnerability = "Not vulnerable"
 
-            self.no_people_output.setPlainText(str(people))
-            self.vulnerability_output.setPlainText(vulnerability)
-            self.policemen_needed_output_2.setPlainText(str(policemen))
-            self.building_type_output.setPlainText(str(function))
+                if policemen < 1:
+                    policemen = 1
+
+                self.no_people_output.setPlainText(str(people))
+                self.vulnerability_output.setPlainText(vulnerability)
+                self.policemen_needed_output_2.setPlainText(str(policemen))
+                self.building_type_output.setPlainText(str(function))
 
 
 
