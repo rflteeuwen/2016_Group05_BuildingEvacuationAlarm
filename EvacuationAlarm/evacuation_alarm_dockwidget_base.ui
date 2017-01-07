@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>2091</width>
-    <height>1320</height>
+    <height>1397</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>0</x>
      <y>10</y>
      <width>917</width>
-     <height>1392</height>
+     <height>1456</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -221,9 +221,6 @@
            </widget>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QTimeEdit" name="time"/>
         </item>
        </layout>
       </item>
@@ -438,7 +435,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
           <property name="leftMargin">
            <number>1</number>
           </property>
@@ -456,7 +453,37 @@
            </widget>
           </item>
           <item alignment="Qt::AlignRight">
-           <widget class="QTextEdit" name="affected_people_output">
+           <widget class="QTextEdit" name="affected_people_output_2">
+            <property name="maximumSize">
+             <size>
+              <width>256</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="leftMargin">
+           <number>1</number>
+          </property>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="Policemen_alarm_name">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Policemen alarm</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight">
+           <widget class="QTextEdit" name="policemen_alarm_output">
             <property name="maximumSize">
              <size>
               <width>256</width>

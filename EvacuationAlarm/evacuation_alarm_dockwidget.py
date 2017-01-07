@@ -83,8 +83,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.specific_building_button.clicked.connect(self.getSpecificInformation)
 
     def getSpecificInformation(self):
-        txt = "hello"
-        self.no_people_output.setPlainText(txt)
 
         layer = self.iface.activeLayer()
         selected = layer.selectedFeatures()
@@ -97,7 +95,17 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             people = attrs[22]
             policemen = int(people / 10)
             function = attrs[17]
-            vulnerability = "not working yet"
+
+            funct_list = ["hospital", "doctors", "fire_station", "kindergarten", "nursing_home", "police", "school"]
+
+            if function in funct_list:
+                vulnerability = "Vulnerable!"
+            else:
+                function = "Not of particular interest"
+                vulnerability = "Not vulnerable"
+
+            if policemen < 1:
+                policemen = 1
 
             self.no_people_output.setPlainText(str(people))
             self.vulnerability_output.setPlainText(vulnerability)
