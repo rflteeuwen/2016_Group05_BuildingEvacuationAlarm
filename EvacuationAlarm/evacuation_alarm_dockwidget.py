@@ -33,7 +33,6 @@ from PyQt4.QtGui import QLineEdit
 import os, sys
 import qgis
 
-
 from qgis.networkanalysis import *
 from pyspatialite import dbapi2 as sqlite
 import psycopg2 as pgsql
@@ -46,7 +45,6 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 
 class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
-
     closingPlugin = pyqtSignal()
 
     def __init__(self, iface, parent=None):
@@ -72,14 +70,44 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # fire data
         self.chemicals_yes.clicked.connect(self.print_yes)
         self.chemicals_no.clicked.connect(self.print_no)
-        #self.affected_buildings.clicked.connect(self.show_location)
+        # self.affected_buildings.clicked.connect(self.show_location)
 
-        self.intensityfire_input.valueChanged.connect(self.print_intensity)  #to be checked in prof code
+        self.intensityfire_input.valueChanged.connect(self.print_intensity)  # to be checked in prof code
 
         # calculations
         self.affected_buildings_button.clicked.connect(self.affected_buildings_calc)
         self.police_force_button.clicked.connect(self.police_force_calc)
         self.policeman_alarm_button.clicked.connect(self.police_force_alarm)
+
+        # specific building data
+        self.specific_building_button.clicked.connect(self.getSpecificInformation)
+
+    def getSpecificInformation(self):
+        txt = "hello"
+        self.no_people_output.setPlainText(txt)
+
+        layer = self.iface.activeLayer()
+        selected = layer.selectedFeatures()
+
+        # to implement: we allow only one feature at a time to be selected
+
+        for item in selected:
+            attrs = item.attributes()
+
+            people = attrs[22]
+            policemen = int(people / 10)
+            function = attrs[17]
+            vulnerability = "not working yet"
+
+            self.no_people_output.setPlainText(str(people))
+            self.vulnerability_output.setPlainText(vulnerability)
+            self.policemen_needed_output_2.setPlainText(str(policemen))
+            self.building_type_output.setPlainText(str(function))
+
+
+
+
+
     def getFeaturesByIntersection(base_layer, intersect_layer, crosses):
         features = []
         # retrieve objects to be intersected (list comprehension, more pythonic)
@@ -123,8 +151,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                         ids.append(feature.id())
         return attributes, ids
 
-
-
     def show_location(self):
         location = self.location_input.text()
         self.fire_location_output.setPlainText(location)
@@ -141,12 +167,12 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def affected_buildings_calc(self):
         # This dictionary links the chosen inputs to the existing scenarios
-        scenario_dict = {'North':{3: 'plume3'}, 'North-East':{2: 'plume1'}, 'East':{1: 'plume2'}}
+        scenario_dict = {'North': {3: 'plume3'}, 'North-East': {2: 'plume1'}, 'East': {1: 'plume2'}}
 
-        #read in the values specified by the user
+        # read in the values specified by the user
         wind_direction = str(self.winddirection_input.currentText())
         wind_intensity = int(self.windintensity_input.value())
-        #fire_location =
+        # fire_location =
 
 
         # check which scenario is applicable
@@ -175,16 +201,11 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         for building in affected_buildings:
             affected_people += dictionary[building.id()]
 
-
         # output
         number_of_affected_buildings = len(affected_buildings)
         self.affected_buildings_output.setPlainText(number_of_affected_buildings)
 
         self.affected_people_output.setPlainText(affected_people)
-
-
-
-
 
     def police_force_calc(self):
         pass
@@ -192,15 +213,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def police_force_alarm(self):
         pass
 
-
-
-
-
-
-
-
     def loadProject(self):
-
 
         # create Qt widget
         canvas = QgsMapCanvas()
@@ -238,17 +251,8 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         canvas.refresh()
         canvas.show()'''
 
-
-
-
-
-
-
-
-
-
     def closeEvent(self, event):
         self.closingPlugin.emit()
         event.accept()
 
-#test
+        # test

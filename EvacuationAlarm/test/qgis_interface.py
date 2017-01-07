@@ -148,6 +148,7 @@ class QgisInterface(QObject):
         pass
 
     def activeLayer(self):
+        # type: () -> object
         """Get pointer to the active layer (layer selected in the legend)."""
         # noinspection PyArgumentList
         layers = QgsMapLayerRegistry.instance().mapLayers()

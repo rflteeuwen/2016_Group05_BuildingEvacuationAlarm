@@ -18,8 +18,8 @@
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>601</width>
-     <height>671</height>
+     <width>917</width>
+     <height>1392</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -260,6 +260,13 @@
          <widget class="QPushButton" name="policeman_alarm_button">
           <property name="text">
            <string>3. Policeman alarm</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="specific_building_button">
+          <property name="text">
+           <string>4. Specific building</string>
           </property>
          </widget>
         </item>
