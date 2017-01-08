@@ -85,14 +85,15 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def getSpecificInformation(self):
 
-        layers = qgis.utils.iface.legendInterface().layers()
         layer = self.iface.activeLayer()
         selected = layer.selectedFeatures()
+        name = layer.name()
 
-        # we allow only one feature at a time to be selected
+        # we allow only one feature at a time to be selected and it must be in the buildings layer
         if len(selected) > 1:
-            self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.CRITICAL, duration = 3)
-
+            self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.CRITICAL, duration = 5)
+        elif name != "Buildings":
+            self.iface.messageBar().pushMessage("Error", "The Buildings layer was not active, please make the layer active and reselect the building", level=QgsMessageBar.CRITICAL, duration=5)
         else:
 
             for item in selected:
@@ -185,36 +186,20 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
     '''
 
     def show_location(self):
-        # by clicking the map
-        # very  hard :(
-
         # by selecting a building in which the fire is
-
-        #layers = qgis.utils.iface.legendInterface().layers()
-        layers = qgis.utils.iface.legendInterface().layers()
         layer = self.iface.activeLayer()
         selected = layer.selectedFeatures()
+        name = layer.name()
 
-        '''for building in selected:
-            features = selected.getFeatures()
-            for f in features:
-                pt = f.geometry().centroid().asPoint()
-                print pt'''
-
-
-
-
-
-
-
-
-
-
-
-
-        # just reading and displaying text
-        location = self.location_input.text()
-        self.fire_location_output.setPlainText(location)
+        # we allow only one feature at a time to be selected and it must be in the buildings layer
+        if len(selected) > 1:
+            self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.CRITICAL, duration = 5)
+        elif name != "Buildings":
+            self.iface.messageBar().pushMessage("Error", "The Buildings layer was not active, please make the layer active and reselect the building", level=QgsMessageBar.CRITICAL, duration=5)
+        else:
+            for building in selected:
+                pt = building.geometry().centroid().asPoint()
+                self.fire_location_output.setPlainText(str(pt))
 
     def print_yes(self):
         self.fire_chemicals_output.setHtml("Chemicals present")
@@ -329,10 +314,3 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # test
 
-class PointTool(QgsMapToolEmitPoint):
-    def __init__(self, canvas):
-        QgsMapToolEmitPoint.__init__(self, canvas)
-
-    def canvasReleaseEvent(self, mouseEvent):
-        qgsPoint = self.toMapCoordinates(mouseEvent.pos())
-        print('x:', qgsPoint.x(), ', y:', qgsPoint.y())
