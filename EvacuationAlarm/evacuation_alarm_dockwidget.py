@@ -85,13 +85,18 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def getSpecificInformation(self):
 
+        layers = qgis.utils.iface.legendInterface().layers()
         layer = self.iface.activeLayer()
         selected = layer.selectedFeatures()
 
-        # to implement: we allow only one feature at a time to be selected
-
+        # we allow only one feature at a time to be selected
         if len(selected) > 1:
             self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.CRITICAL, duration = 3)
+        # the active layer must be the buildings layer
+        elif layers[0] != layer:
+            QgsMapLayer = layers[0]
+            qgis.utils.iface.setActiveLayer(QgsMapLayer)
+            self.iface.messageBar().pushMessage("Error", "The buildings layer was not active, please reselect your building and push the button", level=QgsMessageBar.CRITICAL, duration=3)
         else:
 
             for item in selected:
@@ -265,28 +270,11 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         project = QgsProject.instance()
         project.read(QFileInfo(source_dir))
 
+        # set Buildings layers to active layer
+        layers = qgis.utils.iface.legendInterface().layers()
+        QgsMapLayer = layers[0]
+        qgis.utils.iface.setActiveLayer(QgsMapLayer)
 
-        # old version: loading layers separately
-        '''
-        # canvas_layers = []
-        # load vector layers
-        for files in os.listdir(source_dir):
-
-            # load only the shapefiles
-            if files.endswith(".qgs"):
-                vproject = QgsProject(source_dir)
-
-                # add layer to the registry
-                QgsMapLayerRegistry.instance().addMapLayer(vlayer)
-
-
-                canvas_layers.append(QgsMapCanvasLayer(vlayer))
-
-        # refresh canvas and show it
-
-        canvas.setLayerSet(canvas_layers)
-        canvas.refresh()
-        canvas.show()'''
 
     def loadPlume(self, plume):
         plugin_dir = os.path.dirname(__file__)
