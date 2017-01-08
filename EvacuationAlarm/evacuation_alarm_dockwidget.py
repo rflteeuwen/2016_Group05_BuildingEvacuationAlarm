@@ -78,7 +78,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # calculations
         self.affected_buildings_button.clicked.connect(self.affected_buildings_calc)
         self.police_force_button.clicked.connect(self.police_force_calc)
-        self.policeman_alarm_button.clicked.connect(self.police_force_alarm)
 
         # specific building data
         self.specific_building_button.clicked.connect(self.getSpecificInformation)
@@ -263,12 +262,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         self.policemen_needed_output.setPlainText(str(policemen_needed))
 
-    def police_force_alarm(self):
-        affected_people = self.affected_buildings_calc()
         policemen_available = int(self.nr_policeman_input.text())
-        policemen_needed = int(affected_people) / 10
         if policemen_available < policemen_needed:
-            self.policemen_alarm_output.setHtml("Warning: there are not enough policemen available")
+            self.policemen_alarm_output.setHtml("Warning: Not enough policemen available")
 
         else:
             self.policemen_alarm_output.setHtml("There are enough policemen available")

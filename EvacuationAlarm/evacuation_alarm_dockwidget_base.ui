@@ -248,16 +248,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="policeman_alarm_button">
-          <property name="text">
-           <string>3. Policeman alarm</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QPushButton" name="specific_building_button">
           <property name="text">
-           <string>4. Specific building</string>
+           <string>3. Specific building information</string>
           </property>
          </widget>
         </item>
