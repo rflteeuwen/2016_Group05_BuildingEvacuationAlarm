@@ -92,11 +92,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # we allow only one feature at a time to be selected
         if len(selected) > 1:
             self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.CRITICAL, duration = 3)
-        # the active layer must be the buildings layer
-        elif layers[0] != layer:
-            QgsMapLayer = layers[0]
-            qgis.utils.iface.setActiveLayer(QgsMapLayer)
-            self.iface.messageBar().pushMessage("Error", "The buildings layer was not active, please reselect your building and push the button", level=QgsMessageBar.CRITICAL, duration=3)
+
         else:
 
             for item in selected:
@@ -189,6 +185,34 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
     '''
 
     def show_location(self):
+        # by clicking the map
+        # very  hard :(
+
+        # by selecting a building in which the fire is
+
+        #layers = qgis.utils.iface.legendInterface().layers()
+        layers = qgis.utils.iface.legendInterface().layers()
+        layer = self.iface.activeLayer()
+        selected = layer.selectedFeatures()
+
+        '''for building in selected:
+            features = selected.getFeatures()
+            for f in features:
+                pt = f.geometry().centroid().asPoint()
+                print pt'''
+
+
+
+
+
+
+
+
+
+
+
+
+        # just reading and displaying text
         location = self.location_input.text()
         self.fire_location_output.setPlainText(location)
 
@@ -246,11 +270,23 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.affected_buildings_output.setPlainText(str(number_of_affected_buildings))
         self.affected_people_output_2.setPlainText(str(affected_people))
 
+        return affected_people
+
     def police_force_calc(self):
-        pass
+        affected_people = self.affected_buildings_calc()
+        policemen_needed = int(affected_people) / 10
+
+        self.policemen_needed_output.setPlainText(str(policemen_needed))
 
     def police_force_alarm(self):
-        pass
+        affected_people = self.affected_buildings_calc()
+        policemen_available = int(self.nr_policeman_input.text())
+        policemen_needed = int(affected_people) / 10
+        if policemen_available < policemen_needed:
+            self.policemen_alarm_output.setHtml("Warning: there are not enough policemen available")
+
+        else:
+            self.policemen_alarm_output.setHtml("There are enough policemen available")
 
     def loadProject(self):
 
@@ -275,6 +311,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         QgsMapLayer = layers[0]
         qgis.utils.iface.setActiveLayer(QgsMapLayer)
 
+        # zoom full extent
+        self.canvas.zoomToFullExtent()
+
 
     def loadPlume(self, plume):
         plugin_dir = os.path.dirname(__file__)
@@ -289,3 +328,11 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         event.accept()
 
         # test
+
+class PointTool(QgsMapToolEmitPoint):
+    def __init__(self, canvas):
+        QgsMapToolEmitPoint.__init__(self, canvas)
+
+    def canvasReleaseEvent(self, mouseEvent):
+        qgsPoint = self.toMapCoordinates(mouseEvent.pos())
+        print('x:', qgsPoint.x(), ', y:', qgsPoint.y())

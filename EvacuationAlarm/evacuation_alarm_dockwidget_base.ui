@@ -89,7 +89,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="nr_policeman_input"/>
+         <widget class="QSpinBox" name="nr_policeman_input">
+          <property name="maximum">
+           <number>10000</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
