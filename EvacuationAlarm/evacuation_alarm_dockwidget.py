@@ -40,6 +40,7 @@ import numpy as np
 import math
 import os.path
 
+
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'evacuation_alarm_dockwidget_base.ui'))
 
@@ -97,16 +98,17 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 attrs = item.attributes()
 
                 people = attrs[22]
-                policemen = int(people / 10)
                 function = attrs[17]
 
                 funct_list = ["hospital", "doctors", "fire_station", "kindergarten", "nursing_home", "police", "school"]
 
                 if function in funct_list:
                     vulnerability = "Vulnerable!"
+                    policemen = int(people / 25)
                 else:
                     function = "Not of particular interest"
                     vulnerability = "Not vulnerable"
+                    policemen = int(people / 50)
 
                 if policemen < 1:
                     policemen = 1
@@ -116,11 +118,28 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 self.policemen_needed_output_2.setPlainText(str(policemen))
                 self.building_type_output.setPlainText(str(function))
 
+    def getLayer(self, name):
+        layer = None
+        #for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+        for lyr in self.iface.legendInterface().layers():
+            if lyr.name() == name:
+                layer = lyr
+                break
+        return layer
 
+    def movePlume(self,layer_name, dx, dy, fId=1):
+        layer = self.getLayer(layer_name)
+        layer.startEditing()
+        layerUtil = QgsVectorLayerEditUtils(layer)
+        result = layerUtil.translateFeature(fId, dx, dy)
+        layer.commitChanges()
+        layer.triggerRepaint()
+        for feature in layer.getFeatures():
+            layer.updateFeature(feature)
 
+        return result
 
-
-    def getFeaturesByIntersection(base_layer, intersect_layer, crosses):
+    def getFeaturesByIntersection(self, base_layer, intersect_layer, crosses):
         features = []
         # retrieve objects to be intersected (list comprehension, more pythonic)
         intersect_geom = [QgsGeometry(feat.geometry()) for feat in intersect_layer.getFeatures()]
@@ -141,8 +160,8 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             if append:
                 features.append(feat)
         return features
-
-    def getFieldValues(layer, fieldname, null=True, selection=False):
+    '''
+    def getFieldValues(self, layer, fieldname, null=True, selection=False):
         attributes = []
         ids = []
         if fieldExists(layer, fieldname):
@@ -162,6 +181,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                         attributes.append(val)
                         ids.append(feature.id())
         return attributes, ids
+    '''
 
     def show_location(self):
         location = self.location_input.text()
@@ -192,32 +212,34 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             if wind_intensity in scenario_dict[wind_direction]:
                 scenario = scenario_dict[wind_direction][wind_intensity]
             else:
-                print 'Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario'
+                self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.CRITICAL, duration=6)
+
         else:
-            print 'Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario'
+            self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.CRITICAL, duration=6)
+
+        # load the correct plume_layer
+        self.loadPlume(scenario)
 
         # move the plume to the correct location
+        '''
+        self.movePlume(scenario, 10000, 10000)
+        '''
 
-
+        # select the correct layers
+        base_layer = self.getLayer("Buildings")
+        intersect_layer = self.getLayer(scenario)
 
         # retrieve a list of affected buildings and their information
-        base_layer = '02_smallBuildings_with_functions'
-        intersect_layer = scenario
-        affected_buildings = getFeaturesByIntersection(base_layer, intersect_layer, True)
-
-        # calculate number of affected people
-        list_people, list_ids = getFieldValues(base_layer, 'people')
-        dictionary = dict(zip(list_ids, list_people))
+        affected_buildings = self.getFeaturesByIntersection(base_layer, intersect_layer, True)
+        number_of_affected_buildings = len(affected_buildings)
 
         affected_people = 0
         for building in affected_buildings:
-            affected_people += dictionary[building.id()]
+            affected_people += int(building['people'])
 
         # output
-        number_of_affected_buildings = len(affected_buildings)
-        self.affected_buildings_output.setPlainText(number_of_affected_buildings)
-
-        self.affected_people_output.setPlainText(affected_people)
+        self.affected_buildings_output.setPlainText(str(number_of_affected_buildings))
+        self.affected_people_output_2.setPlainText(str(affected_people))
 
     def police_force_calc(self):
         pass
@@ -237,13 +259,16 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # not updated US6SP10M files from ENC_ROOT
         plugin_dir = os.path.dirname(__file__)
         source_dir = plugin_dir + '/sample_data/backgroundDataProject.qgs'
+        shape = plugin_dir + '/sample_data/plumes/plume1.shp'
 
         # read project
         project = QgsProject.instance()
         project.read(QFileInfo(source_dir))
 
+
         # old version: loading layers separately
-        '''# canvas_layers = []
+        '''
+        # canvas_layers = []
         # load vector layers
         for files in os.listdir(source_dir):
 
@@ -262,6 +287,14 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         canvas.setLayerSet(canvas_layers)
         canvas.refresh()
         canvas.show()'''
+
+    def loadPlume(self, plume):
+        plugin_dir = os.path.dirname(__file__)
+        plume_shape = plugin_dir + '/sample_data/plumes/'+ str(plume) + '.shp'
+        layer = self.iface.addVectorLayer(plume_shape, str(plume), "ogr")
+        layer.setLayerTransparency(50)
+        #layer.setLayerColor
+
 
     def closeEvent(self, event):
         self.closingPlugin.emit()

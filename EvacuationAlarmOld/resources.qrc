@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/plugins/EvacuationAlarm" >
-        <file>icon.png</file>
-    </qresource>
-</RCC>
