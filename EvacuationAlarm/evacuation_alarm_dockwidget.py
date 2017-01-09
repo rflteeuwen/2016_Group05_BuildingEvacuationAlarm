@@ -256,10 +256,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.affected_buildings_output.setPlainText(str(number_of_affected_buildings))
         self.affected_people_output_2.setPlainText(str(affected_people))
 
-        return affected_people
-
     def police_force_calc(self):
-        affected_people = self.affected_buildings_calc()
+
+        affected_people = self.affected_people_output_2.toPlainText()
         policemen_needed = int(affected_people) / 10
 
         self.policemen_needed_output.setPlainText(str(policemen_needed))
