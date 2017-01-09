@@ -133,11 +133,13 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         layer.startEditing()
         layerUtil = QgsVectorLayerEditUtils(layer)
         result = layerUtil.translateFeature(fId, dx, dy)
+        # result is 1, means translation was not succesful
         layer.commitChanges()
         layer.triggerRepaint()
-        for feature in layer.getFeatures():
-            layer.updateFeature(feature)
+        self.canvas.refresh()
 
+
+        print result
         return result
 
     def getFeaturesByIntersection(self, base_layer, intersect_layer, crosses):
@@ -234,9 +236,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.loadPlume(scenario)
 
         # move the plume to the correct location
-        '''
+
         self.movePlume(scenario, 10000, 10000)
-        '''
+
 
         # select the correct layers
         base_layer = self.getLayer("Buildings")
