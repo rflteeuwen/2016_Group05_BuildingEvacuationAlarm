@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1032</width>
-    <height>1200</height>
+    <height>1548</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>0</x>
      <y>20</y>
      <width>1029</width>
-     <height>1174</height>
+     <height>1517</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -27,19 +27,6 @@
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QLabel" name="calculate_header_3">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
         <item>
          <widget class="QLabel" name="calculate_header_2">
           <property name="font">
@@ -54,9 +41,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="start">
+         <widget class="QTextEdit" name="incident_info"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="load_incident">
           <property name="text">
-           <string>Load map</string>
+           <string>Load latest incident</string>
           </property>
          </widget>
         </item>
@@ -219,42 +209,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="calculate_header">
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>CALCULATION</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QPushButton" name="affected_buildings_button">
-          <property name="text">
-           <string>1. Affected buildings</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="police_force_button">
-          <property name="text">
-           <string>2. Police force</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="specific_building_button">
-          <property name="text">
-           <string>3. Specific building information</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <layout class="QHBoxLayout" name="horizontalLayout_2"/>
       </item>
       <item>
        <widget class="QLabel" name="calculate_header_4">
@@ -266,6 +221,13 @@
         </property>
         <property name="text">
          <string>GENERAL INFORMATION</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="affected_buildings_button">
+        <property name="text">
+         <string>1. Affected buildings</string>
         </property>
        </widget>
       </item>
@@ -587,6 +549,13 @@
         </property>
         <property name="text">
          <string>BUILDING INFORMATION</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="specific_building_button">
+        <property name="text">
+         <string>2. Specific building information</string>
         </property>
        </widget>
       </item>
