@@ -89,25 +89,25 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         random_address = self.findAddresses()
 
         incident1 = "Report: February 31st 2017 " \
-                    "Fire at address ... causing dangerous smoke. " \
+                    "Fire at address %s causing dangerous smoke. " \
                     "Smoke does not contain chemicals. Fire intensity is low. " \
                     "Wind intensity is high and to North East direction. " \
-                    "Decide on evacuation procedure within 15 minutes."
+                    "Decide on evacuation procedure within 15 minutes." % (str(random_address))
         incident2 = "Report: February 31st 2017 " \
-                    "Fire at address ... causing dangerous smoke. " \
+                    "Fire at address %s causing dangerous smoke. " \
                     "Smoke does not contain chemicals. Fire intensity is high. " \
                     "Wind intensity is low and to East direction. " \
-                    "Decide on evacuation procedure within 15 minutes."
+                    "Decide on evacuation procedure within 15 minutes." % (str(random_address))
         incident3 = "Report: February 31st 2017 " \
-                    "Fire at address ... causing dangerous smoke. " \
+                    "Fire at address %s causing dangerous smoke. " \
                     "Smoke does contain chemicals. Fire intensity is high. " \
                     "Wind intensity is high and to North direction. " \
-                    "Decide on evacuation procedure within 15 minutes."
+                    "Decide on evacuation procedure within 15 minutes." % (str(random_address))
         incident_list = [incident1, incident2, incident3]
 
-        message = random.choice(incident_list)
 
-        print message
+
+        message = random.choice(incident_list)
 
         self.incident_info.setText(message)
 
