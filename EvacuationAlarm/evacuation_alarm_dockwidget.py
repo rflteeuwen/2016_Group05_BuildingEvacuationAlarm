@@ -246,8 +246,17 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             if str(attrs[0]) == str(address):
                 pt = item.geometry().centroid().asPoint()
                 self.fire_location_output.setPlainText(str(pt))
-        return pt
+                return pt
 
+    def currentLocation(self, scenario):
+        layer = self.getLayer(scenario)
+        features = layer.getFeatures()
+
+        for item in features:
+            geom = item.geometry()
+            x = geom.asPolygon()
+            pt = x[0][0]
+            return pt
 
 
     def print_yes(self):
@@ -283,10 +292,17 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # load the correct plume_layer
         self.loadPlume(scenario)
 
+        # define dx and dy to move
+        current = self.currentLocation(scenario)
+        next = self.buildingLocation()
+        x0 = current[0]
+        x1 = next[0]
+        y0 = current[1]
+        y1 = next[1]
+        dx = x1 - x0
+        dy = y1 - y0
         # move the plume to the correct location
-        current_location =
-        next_location = self.buildingLocation()
-        self.movePlume(scenario, 0, -1000)
+        self.movePlume(scenario, dx, dy)
 
 
         # select the correct layers
