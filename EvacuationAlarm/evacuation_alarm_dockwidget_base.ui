@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>20</y>
+     <y>10</y>
      <width>1029</width>
-     <height>1517</height>
+     <height>1336</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -240,7 +240,7 @@
       <item>
        <widget class="QPushButton" name="affected_buildings_button">
         <property name="text">
-         <string>1. Affected buildings</string>
+         <string>Calculate affected buildings</string>
         </property>
        </widget>
       </item>
@@ -568,7 +568,7 @@
       <item>
        <widget class="QPushButton" name="specific_building_button">
         <property name="text">
-         <string>2. Specific building information</string>
+         <string>Get specific building information</string>
         </property>
        </widget>
       </item>
@@ -733,6 +733,13 @@
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="log_close">
+          <property name="text">
+           <string>Log and close</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

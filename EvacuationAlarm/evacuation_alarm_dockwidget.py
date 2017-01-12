@@ -85,6 +85,12 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # specific building data
         self.specific_building_button.clicked.connect(self.getSpecificInformation)
+        self.iface.activeLayer().selectionChanged.connect(self.getSpecificInformation)
+
+        # log and close
+        self.log_close.clicked.connect(self.logOutcomes)
+
+
 
     def loadIncident(self):
         random_address = self.findAddresses()
@@ -353,6 +359,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         layer = self.iface.addVectorLayer(plume_shape, str(plume), "ogr")
         layer.setLayerTransparency(50)
         #layer.setLayerColor
+
+    def logOutcomes(self):
+        pass
 
 
     def closeEvent(self, event):
