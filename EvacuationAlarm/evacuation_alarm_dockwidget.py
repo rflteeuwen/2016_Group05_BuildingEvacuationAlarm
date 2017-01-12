@@ -23,6 +23,7 @@
 
 import os
 import random
+import time
 
 from PyQt4 import QtGui, uic, QtCore
 from PyQt4.QtCore import pyqtSignal
@@ -88,24 +89,23 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def loadIncident(self):
         random_address = self.findAddresses()
 
-        incident1 = "Report: February 31st 2017 " \
-                    "Fire at address %s causing dangerous smoke. " \
-                    "Smoke does not contain chemicals. Fire intensity is low. " \
-                    "Wind intensity is high and to North East direction. " \
-                    "Decide on evacuation procedure within 15 minutes." % (str(random_address))
-        incident2 = "Report: February 31st 2017 " \
-                    "Fire at address %s causing dangerous smoke. " \
-                    "Smoke does not contain chemicals. Fire intensity is high. " \
-                    "Wind intensity is low and to East direction. " \
-                    "Decide on evacuation procedure within 15 minutes." % (str(random_address))
-        incident3 = "Report: February 31st 2017 " \
-                    "Fire at address %s causing dangerous smoke. " \
-                    "Smoke does contain chemicals. Fire intensity is high. " \
-                    "Wind intensity is high and to North direction. " \
-                    "Decide on evacuation procedure within 15 minutes." % (str(random_address))
+        t = (time.strftime("%H:%M:%S"))
+        d = (time.strftime("%d/%m/%Y"))
+
+
+        incident1 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
+                    "Smoke does not contain chemicals. Fire intensity is low. \n" \
+                    "Wind intensity is high and to North East direction. \n" \
+                    "Decide on evacuation procedure within 15 minutes." % (str(d), str(t), str(random_address))
+        incident2 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
+                    "Smoke does not contain chemicals. Fire intensity is high. \n" \
+                    "Wind intensity is low and to East direction. \n" \
+                    "Decide on evacuation procedure within 15 minutes." % (str(d), str(t), str(random_address))
+        incident3 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
+                    "Smoke does contain chemicals. Fire intensity is high. \n" \
+                    "Wind intensity is high and to North direction. \n" \
+                    "Decide on evacuation procedure within 15 minutes." % (str(d), str(t), str(random_address))
         incident_list = [incident1, incident2, incident3]
-
-
 
         message = random.choice(incident_list)
 
