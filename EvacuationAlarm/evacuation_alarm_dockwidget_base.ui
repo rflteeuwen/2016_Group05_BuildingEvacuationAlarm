@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1032</width>
+    <width>1683</width>
     <height>1548</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>1029</width>
+     <width>1106</width>
      <height>1336</height>
     </rect>
    </property>
@@ -41,6 +41,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="load_incident">
+          <property name="text">
+           <string>Load latest incident</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QTextEdit" name="incident_info">
           <property name="minimumSize">
            <size>
@@ -56,20 +63,6 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QPushButton" name="load_incident">
-          <property name="text">
-           <string>Load latest incident</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="enter_location_button">
-          <property name="text">
-           <string>Select building to enter location</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
       <item>
@@ -79,7 +72,7 @@
           <item>
            <widget class="QLabel" name="nr_of_policeman_available">
             <property name="text">
-             <string>Nr of policeman available</string>
+             <string>Nr of policemen</string>
             </property>
            </widget>
           </item>
@@ -93,37 +86,21 @@
          </layout>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="2" column="0">
-           <widget class="QPushButton" name="chemicals_yes">
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QLabel" name="nr_of_policeman_available_3">
             <property name="text">
-             <string>Yes</string>
-            </property>
-            <property name="checkable">
-             <bool>false</bool>
+             <string>Fire address</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="chemicals_no">
-            <property name="text">
-             <string>No</string>
-            </property>
-            <property name="checkable">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="fire_location_name_2">
+          <item>
+           <widget class="QTextEdit" name="address_input">
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
+              <width>256</width>
               <height>50</height>
              </size>
-            </property>
-            <property name="text">
-             <string>Chemicals</string>
             </property>
            </widget>
           </item>
@@ -147,9 +124,50 @@
           <item row="1" column="0">
            <widget class="QLabel" name="intensityfire">
             <property name="text">
-             <string>Intensity fire</string>
+             <string>Fire intensity</string>
             </property>
            </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="fire_location_name_2">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Fire chemicals</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QPushButton" name="chemicals_yes">
+              <property name="text">
+               <string>Yes</string>
+              </property>
+              <property name="checkable">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="chemicals_no">
+              <property name="text">
+               <string>No</string>
+              </property>
+              <property name="checkable">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
@@ -158,7 +176,7 @@
           <item>
            <widget class="QLabel" name="winddirection">
             <property name="text">
-             <string>wind direction</string>
+             <string>Wind direction</string>
             </property>
            </widget>
           </item>
@@ -263,7 +281,7 @@
              <enum>Qt::LeftToRight</enum>
             </property>
             <property name="text">
-             <string>Fire location:</string>
+             <string>Fire coordinates:</string>
             </property>
            </widget>
           </item>

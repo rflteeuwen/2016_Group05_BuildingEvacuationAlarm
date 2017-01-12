@@ -71,14 +71,11 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.load_incident.clicked.connect(self.loadIncident)
 
         # location
-        self.enter_location_button.clicked.connect(self.show_location)
+        # self.enter_location_button.clicked.connect(self.buildingLocation)
 
         # fire data
-        self.chemicals_yes.clicked.connect(self.print_yes)
-        self.chemicals_no.clicked.connect(self.print_no)
-        # self.affected_buildings.clicked.connect(self.show_location)
-
-        self.intensityfire_input.valueChanged.connect(self.print_intensity)  # to be checked in prof code
+        self.affected_buildings_button.clicked.connect(self.print_yes)
+        self.affected_buildings_button.clicked.connect(self.print_no)
 
         # calculations
         self.affected_buildings_button.clicked.connect(self.affected_buildings_calc)
@@ -118,8 +115,8 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def findAddresses(self):
         address_list = []
-
-        layer = self.iface.activeLayer()
+        name = "Buildings"
+        layer = self.getLayer(name)
         features = layer.getFeatures()
         for item in features:
             attrs = item.attributes()
@@ -238,21 +235,20 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         return attributes, ids
     '''
 
-    def show_location(self):
-        # by selecting a building in which the fire is
-        layer = self.iface.activeLayer()
-        selected = layer.selectedFeatures()
-        name = layer.name()
+    def buildingLocation(self):
+        name = "Buildings"
+        address = self.address_input.toPlainText()
+        layer = self.getLayer(name)
+        features = layer.getFeatures()
 
-        # we allow only one feature at a time to be selected and it must be in the buildings layer
-        if len(selected) > 1:
-            self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.CRITICAL, duration = 5)
-        elif name != "Buildings":
-            self.iface.messageBar().pushMessage("Error", "The Buildings layer was not active, please make the layer active and reselect the building", level=QgsMessageBar.CRITICAL, duration=5)
-        else:
-            for building in selected:
-                pt = building.geometry().centroid().asPoint()
+        for item in features:
+            attrs = item.attributes()
+            if str(attrs[0]) == str(address):
+                pt = item.geometry().centroid().asPoint()
                 self.fire_location_output.setPlainText(str(pt))
+        return pt
+
+
 
     def print_yes(self):
         self.fire_chemicals_output.setHtml("Chemicals present")
@@ -288,8 +284,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.loadPlume(scenario)
 
         # move the plume to the correct location
-
-        self.movePlume(scenario, 1000, 1000)
+        current_location =
+        next_location = self.buildingLocation()
+        self.movePlume(scenario, 0, -1000)
 
 
         # select the correct layers
@@ -307,6 +304,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # output
         self.affected_buildings_output.setPlainText(str(number_of_affected_buildings))
         self.affected_people_output_2.setPlainText(str(affected_people))
+        self.print_intensity()
 
         # call police force calculation function right away
         self.police_force_calc()
