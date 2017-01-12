@@ -88,16 +88,28 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def loadIncident(self):
         random_address = self.findAddresses()
 
-        incident1 = "Report: February 31st 2017 Fire at address ... causing dangerous smoke. Smoke does not contain chemicals. Fire intensity is low. Wind intensity is high and to North East direction. Decide on evacuation procedure within 15 minutes."
-        incident2 = "Report: February 31st 2017 Fire at address ... causing dangerous smoke. Smoke does not contain chemicals. Fire intensity is high. Wind intensity is low and to East direction. Decide on evacuation procedure within 15 minutes."
-        incident3 = "Report: February 31st 2017 Fire at address ... causing dangerous smoke. Smoke does contain chemicals. Fire intensity is high. Wind intensity is high and to North direction. Decide on evacuation procedure within 15 minutes."
-        incident_list = [incident1]
+        incident1 = "Report: February 31st 2017 " \
+                    "Fire at address ... causing dangerous smoke. " \
+                    "Smoke does not contain chemicals. Fire intensity is low. " \
+                    "Wind intensity is high and to North East direction. " \
+                    "Decide on evacuation procedure within 15 minutes."
+        incident2 = "Report: February 31st 2017 " \
+                    "Fire at address ... causing dangerous smoke. " \
+                    "Smoke does not contain chemicals. Fire intensity is high. " \
+                    "Wind intensity is low and to East direction. " \
+                    "Decide on evacuation procedure within 15 minutes."
+        incident3 = "Report: February 31st 2017 " \
+                    "Fire at address ... causing dangerous smoke. " \
+                    "Smoke does contain chemicals. Fire intensity is high. " \
+                    "Wind intensity is high and to North direction. " \
+                    "Decide on evacuation procedure within 15 minutes."
+        incident_list = [incident1, incident2, incident3]
 
         message = random.choice(incident_list)
 
         print message
 
-        #self.incident_info.toPlainText(message)
+        self.incident_info.setText(message)
 
     def findAddresses(self):
         address_list = []
@@ -306,6 +318,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             self.policemen_alarm_output.setHtml("There are enough policemen available")
 
     def loadProject(self):
+
+        # empty the canvas
+        QgsMapLayerRegistry.instance().removeAllMapLayers()
 
         # create Qt widget
         canvas = QgsMapCanvas()
