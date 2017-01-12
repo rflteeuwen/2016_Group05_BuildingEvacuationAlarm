@@ -97,7 +97,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         incident1 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
                     "Smoke does not contain chemicals. Fire intensity is low. \n" \
-                    "Wind intensity is high and to North East direction. \n" \
+                    "Wind intensity is medium and to North East direction. \n" \
                     "Decide on evacuation procedure within 15 minutes." % (str(d), str(t), str(random_address))
         incident2 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
                     "Smoke does not contain chemicals. Fire intensity is high. \n" \
