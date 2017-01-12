@@ -84,7 +84,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.affected_buildings_button.clicked.connect(self.affected_buildings_calc)
 
         # specific building data
-        self.specific_building_button.clicked.connect(self.getSpecificInformation)
         self.iface.activeLayer().selectionChanged.connect(self.getSpecificInformation)
 
         # log and close
@@ -178,12 +177,19 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 break
         return layer
 
-    def movePlume(self,layer_name, dx, dy, fId=1):
+    def movePlume(self, layer_name, dx, dy):
         layer = self.getLayer(layer_name)
+        features = layer.getFeatures()
+        for item in features:
+            id = item.id()
+        fId = id
+
+        dx = 1000
+        dy = 500
+
         layer.startEditing()
         layerUtil = QgsVectorLayerEditUtils(layer)
         result = layerUtil.translateFeature(fId, dx, dy)
-        # result is 1, means translation was not succesful
         layer.commitChanges()
         layer.triggerRepaint()
         self.canvas.refresh()
@@ -287,7 +293,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # move the plume to the correct location
 
-        self.movePlume(scenario, 10000, 10000)
+        self.movePlume(scenario, 0.5, 10)
 
 
         # select the correct layers

@@ -233,14 +233,14 @@
          </font>
         </property>
         <property name="text">
-         <string>GENERAL INFORMATION</string>
+         <string>GENERAL INFORMATION: fill in information from incident message and perform calculation</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="affected_buildings_button">
         <property name="text">
-         <string>Calculate affected buildings</string>
+         <string>Perform calculation</string>
         </property>
        </widget>
       </item>
@@ -561,14 +561,7 @@
          </font>
         </property>
         <property name="text">
-         <string>BUILDING INFORMATION</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="specific_building_button">
-        <property name="text">
-         <string>Get specific building information</string>
+         <string>SPECIFIC BUILDING INFORMATION: select a building to see information</string>
         </property>
        </widget>
       </item>
