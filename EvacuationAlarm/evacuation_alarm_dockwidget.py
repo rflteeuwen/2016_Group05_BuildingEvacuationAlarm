@@ -415,23 +415,25 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         log_t = (time.strftime("%H.%M.%S"))
         log_d = (time.strftime("%d.%m.%Y"))
 
-        #folder_dir = 'C:/Users/rflte/Documents/EvacuationAlarmLogFiles/'
         plugin_dir = os.path.dirname(__file__)
         folder_dir = plugin_dir + "/log_files/"
         name  = "log_%s_%s.csv" % (log_d, log_t)
         file_dir = folder_dir + name
 
-        header = "Log File created on date %s at time %s \n" % (log_d, log_t)
-        message = self.incident_info.toPlainText()
-        affected = 0
+        header1 = "This log file was created on date %s at time %s \n \n" % (log_d, log_t)
+        message = "Incident message: \n" + self.incident_info.toPlainText() + "\n \n"
+        header2 = "The plugin calculated the following evacuation information: \n"
+        fire_coords = "The fire is in building with coordinates: " + self.fire_location_output.toPlainText() + "\n"
+        affected_buildings = "The number of buildings affected by smoke is: " + self.affected_buildings_output.toPlainText() + "\n"
+        affected_people = "The estimated number of people in these buildings is: " + self.affected_people_output_2.toPlainText() + "\n"
+        policemen = "The number of policemen needed to evacuate these people is: " + self.policemen_needed_output.toPlainText() + "\n"
+        alarm = self.policemen_alarm_output.toPlainText()
 
-        log_text = header + message
-
+        log_text = header1 + message + header2 + fire_coords + affected_buildings + affected_people + policemen + alarm
 
         f = open(file_dir, 'wt')
         f.write(log_text)
         f.close()
-
 
     def closeEvent(self, event):
         self.closingPlugin.emit()
