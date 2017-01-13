@@ -234,6 +234,37 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                         ids.append(feature.id())
         return attributes, ids
     '''
+    
+    def make_extra_layer(self,feature_list):
+        #cLayer = qgis.utils.iface.mapCanvas().currentLayer()
+        #cLayer = getLayer("Buildings")
+        #provider = cLayer.dataProvider()
+        #writer = QgsVectorFileWriter( "subset_buildings", provider.encoding(), provider.fields(),QGis.WKBPolygon, provider.crs() )
+         
+        #layer = self.iface.activeLayer()
+        #(res, outFeats) = layer.dataProvider().addFeatures(feature_list)
+        
+        # create new temporary layer 
+        vl = QgsVectorLayer("Polygon", "subset_buildings", "memory")
+        pr = vl.dataProvider()
+            
+        # Enter editing mode
+        vl.startEditing()
+        pr.addFeatures(feature_list)
+
+        # Add fields
+        pr.addAttributes([QgsField("gid", QVariant.Int), QgsField("fclass", QVariant.String), QgsField("people", QVariant.Int)])
+
+        # Commit changes
+        vl.commitChanges()
+
+        # update layer's extent when new features have been added
+        # because change of extent in provider is not propagated to the layer
+        vl.updateExtents()
+
+        # add layer to the legend
+        QgsMapLayerRegistry.instance().addMapLayer(vl)
+
 
     def buildingLocation(self):
         name = "Buildings"
@@ -271,6 +302,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def affected_buildings_calc(self):
         # This dictionary links the chosen inputs to the existing scenarios
+        
         scenario_dict = {'North': {3: 'plume3'}, 'North-East': {2: 'plume1'}, 'East': {1: 'plume2'}}
 
         # read in the values specified by the user
@@ -312,6 +344,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # retrieve a list of affected buildings and their information
         affected_buildings = self.getFeaturesByIntersection(base_layer, intersect_layer, True)
         number_of_affected_buildings = len(affected_buildings)
+        
+        # create a new layer only containing the affected buildings
+        self.make_extra_layer(affected_buildings)
 
         affected_people = 0
         for building in affected_buildings:
