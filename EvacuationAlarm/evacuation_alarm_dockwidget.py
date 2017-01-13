@@ -70,13 +70,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # incident
         self.load_incident.clicked.connect(self.loadIncident)
 
-        # location
-        # self.enter_location_button.clicked.connect(self.buildingLocation)
-
-        # fire data
-        self.affected_buildings_button.clicked.connect(self.print_yes)
-        self.affected_buildings_button.clicked.connect(self.print_no)
-
         # calculations
         self.affected_buildings_button.clicked.connect(self.affected_buildings_calc)
         self.affected_list = []
@@ -284,16 +277,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             return pt
 
 
-    def print_yes(self):
-        self.fire_chemicals_output.setHtml("Chemicals present")
-
-    def print_no(self):
-        self.fire_chemicals_output.setHtml("No chemicals present")
-
-    def print_intensity(self):
-        intensity = str(self.intensityfire_input.value())
-        self.fire_intensity_output.setPlainText(intensity)
-
     def affected_buildings_calc(self):
         # This dictionary links the chosen inputs to the existing scenarios
         
@@ -350,7 +333,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # output
         self.affected_buildings_output.setPlainText(str(number_of_affected_buildings))
         self.affected_people_output_2.setPlainText(str(affected_people))
-        self.print_intensity()
 
         # call police force calculation function right away
         self.police_force_calc()
@@ -412,7 +394,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         plugin_dir = os.path.dirname(__file__)
         folder_dir = plugin_dir + "/log_files/"
-        folder_dir = "Desktop/"
         name  = "log_%s_%s.csv" % (log_d, log_t)
         file_dir = folder_dir + name
 
@@ -439,6 +420,31 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             gid = (str(attrs[0]) + "\n")
             f.write(gid)
         f.close
+
+        self.iface.messageBar().pushMessage(
+            "A log file was created in your plugin directory 'log_files' (C:\Users\username\.qgis2\python\plugins\EvacuationAlarm)",
+            level=QgsMessageBar.SUCCESS)
+
+        self.refreshPlugin()
+
+
+    def refreshPlugin(self):
+        # reload canvas to start situation
+        self.loadProject()
+
+        # clear input fields
+        self.nr_policeman_input.clear()
+        self.address_input.clear()
+        self.intensityfire_input.clear()
+        self.windintensity_input.clear()
+
+        # clear output fields
+        self.incident_info.clear()
+        self.fire_location_output.clear()
+        self.affected_buildings_output.clear()
+        self.affected_people_output_2.clear()
+        self.policemen_needed_output.clear()
+        self.policemen_alarm_output.clear()
 
     def closeEvent(self, event):
         self.closingPlugin.emit()
