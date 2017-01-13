@@ -79,6 +79,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # calculations
         self.affected_buildings_button.clicked.connect(self.affected_buildings_calc)
+        self.affected_list = []
 
         # specific building data
         self.iface.activeLayer().selectionChanged.connect(self.getSpecificInformation)
@@ -236,16 +237,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
     '''
     
     def make_extra_layer(self,feature_list):
-        #cLayer = qgis.utils.iface.mapCanvas().currentLayer()
-        #cLayer = getLayer("Buildings")
-        #provider = cLayer.dataProvider()
-        #writer = QgsVectorFileWriter( "subset_buildings", provider.encoding(), provider.fields(),QGis.WKBPolygon, provider.crs() )
-         
-        #layer = self.iface.activeLayer()
-        #(res, outFeats) = layer.dataProvider().addFeatures(feature_list)
-        
-        # create new temporary layer 
-        vl = QgsVectorLayer("Polygon", "subset_buildings", "memory")
+
+        # create new temporary layer
+        vl = QgsVectorLayer("Polygon?crs=epsg:28992", "subset_buildings", "memory")
         pr = vl.dataProvider()
             
         # Enter editing mode
@@ -344,6 +338,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # retrieve a list of affected buildings and their information
         affected_buildings = self.getFeaturesByIntersection(base_layer, intersect_layer, True)
         number_of_affected_buildings = len(affected_buildings)
+        self.affected_list.append(affected_buildings)
         
         # create a new layer only containing the affected buildings
         self.make_extra_layer(affected_buildings)
@@ -417,6 +412,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         plugin_dir = os.path.dirname(__file__)
         folder_dir = plugin_dir + "/log_files/"
+        folder_dir = "Desktop/"
         name  = "log_%s_%s.csv" % (log_d, log_t)
         file_dir = folder_dir + name
 
@@ -427,13 +423,22 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         affected_buildings = "The number of buildings affected by smoke is: " + self.affected_buildings_output.toPlainText() + "\n"
         affected_people = "The estimated number of people in these buildings is: " + self.affected_people_output_2.toPlainText() + "\n"
         policemen = "The number of policemen needed to evacuate these people is: " + self.policemen_needed_output.toPlainText() + "\n"
-        alarm = self.policemen_alarm_output.toPlainText()
+        alarm = self.policemen_alarm_output.toPlainText() + "\n \n"
+        header3 = "The affected buildings are the buildings with addresses: \n"
 
-        log_text = header1 + message + header2 + fire_coords + affected_buildings + affected_people + policemen + alarm
+        log_text = header1 + message + header2 + fire_coords + affected_buildings + affected_people + policemen + alarm + header3
 
         f = open(file_dir, 'wt')
         f.write(log_text)
         f.close()
+
+        f = open(file_dir, 'a')
+        affected = self.affected_list[0]
+        for item in affected:
+            attrs = item.attributes()
+            gid = (str(attrs[0]) + "\n")
+            f.write(gid)
+        f.close
 
     def closeEvent(self, event):
         self.closingPlugin.emit()
