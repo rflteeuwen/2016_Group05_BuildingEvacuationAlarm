@@ -18,8 +18,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>651</width>
-     <height>621</height>
+     <width>1106</width>
+     <height>1224</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -758,8 +758,6 @@
     </item>
    </layout>
   </widget>
-  <zorder>verticalLayoutWidget</zorder>
-  <zorder>calculate_header_2</zorder>
  </widget>
  <resources/>
  <connections/>

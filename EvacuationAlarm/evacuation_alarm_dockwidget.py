@@ -412,7 +412,25 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         #layer.setLayerColor
 
     def logOutcomes(self):
-        pass
+        log_t = (time.strftime("%H.%M.%S"))
+        log_d = (time.strftime("%d.%m.%Y"))
+
+        #folder_dir = 'C:/Users/rflte/Documents/EvacuationAlarmLogFiles/'
+        plugin_dir = os.path.dirname(__file__)
+        folder_dir = plugin_dir + "/log_files/"
+        name  = "log_%s_%s.csv" % (log_d, log_t)
+        file_dir = folder_dir + name
+
+        header = "Log File created on date %s at time %s \n" % (log_d, log_t)
+        message = self.incident_info.toPlainText()
+        affected = 0
+
+        log_text = header + message
+
+
+        f = open(file_dir, 'wt')
+        f.write(log_text)
+        f.close()
 
 
     def closeEvent(self, event):
