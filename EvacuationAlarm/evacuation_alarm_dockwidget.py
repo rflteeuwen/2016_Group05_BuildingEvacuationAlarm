@@ -88,7 +88,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         t = (time.strftime("%H:%M:%S"))
         d = (time.strftime("%d/%m/%Y"))
 
-
         incident1 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
                     "Smoke does not contain chemicals. Fire intensity is low. \n" \
                     "Wind intensity is medium and to North East direction. \n" \
@@ -106,6 +105,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         message = random.choice(incident_list)
 
         self.incident_info.setText(message)
+
 
     def findAddresses(self):
         address_list = []
@@ -126,13 +126,9 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         layer = self.iface.activeLayer()
         selected = layer.selectedFeatures()
-        name = layer.name()
 
-        # we allow only one feature at a time to be selected and it must be in the buildings layer
         if len(selected) > 1:
             self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.CRITICAL, duration = 5)
-        elif name != "Buildings":
-            self.iface.messageBar().pushMessage("Error", "The Buildings layer was not active, please make the layer active and reselect the building", level=QgsMessageBar.CRITICAL, duration=5)
         else:
 
             for item in selected:
@@ -159,6 +155,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 self.policemen_needed_output_2.setPlainText(str(policemen))
                 self.building_type_output.setPlainText(str(function))
 
+
     def getLayer(self, name):
         layer = None
         #for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
@@ -167,6 +164,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 layer = lyr
                 break
         return layer
+
 
     def movePlume(self, layer_name, dx, dy):
         layer = self.getLayer(layer_name)
@@ -182,8 +180,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         layer.triggerRepaint()
         self.canvas.refresh()
 
-        #print result
-        #return result
 
     def getFeaturesByIntersection(self, base_layer, intersect_layer, crosses):
         features = []
@@ -228,7 +224,8 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                         ids.append(feature.id())
         return attributes, ids
     '''
-    
+
+
     def make_extra_layer(self,feature_list):
 
         # create new temporary layer
@@ -240,7 +237,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         pr.addFeatures(feature_list)
 
         # Add fields
-        pr.addAttributes([QgsField("gid", QVariant.Int), QgsField("fclass", QVariant.String), QgsField("people", QVariant.Int)])
+        pr.addAttributes([QgsField("gid", QVariant.Int)])
 
         # Commit changes
         vl.commitChanges()
@@ -251,6 +248,10 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # add layer to the legend
         QgsMapLayerRegistry.instance().addMapLayer(vl)
+
+        # make regular buildings layer active again
+        QgsMapLayer = self.getLayer("Buildings")
+        qgis.utils.iface.setActiveLayer(QgsMapLayer)
 
 
     def buildingLocation(self):
@@ -265,6 +266,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 pt = item.geometry().centroid().asPoint()
                 self.fire_location_output.setPlainText(str(pt))
                 return pt
+
 
     def currentLocation(self, scenario):
         layer = self.getLayer(scenario)
@@ -285,8 +287,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # read in the values specified by the user
         wind_direction = str(self.winddirection_input.currentText())
         wind_intensity = int(self.windintensity_input.value())
-        # fire_location =
-
 
         # check which scenario is applicable
         if wind_direction in scenario_dict:
@@ -294,7 +294,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 scenario = scenario_dict[wind_direction][wind_intensity]
             else:
                 self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.CRITICAL, duration=6)
-
         else:
             self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.CRITICAL, duration=6)
 
@@ -312,7 +311,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         dy = y1 - y0
         # move the plume to the correct location
         self.movePlume(scenario, dx, dy)
-
 
         # select the correct layers
         base_layer = self.getLayer("Buildings")
@@ -337,6 +335,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # call police force calculation function right away
         self.police_force_calc()
 
+
     def police_force_calc(self):
 
         affected_people = self.affected_people_output_2.toPlainText()
@@ -350,6 +349,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         else:
             self.policemen_alarm_output.setHtml("There are enough policemen available")
+
 
     def loadProject(self):
 
@@ -375,6 +375,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # set Buildings layers to active layer
         layers = qgis.utils.iface.legendInterface().layers()
         QgsMapLayer = layers[0]
+        QgsMapLayer = self.getLayer("Buildings")
         qgis.utils.iface.setActiveLayer(QgsMapLayer)
 
         # zoom full extent
@@ -387,6 +388,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         layer = self.iface.addVectorLayer(plume_shape, str(plume), "ogr")
         layer.setLayerTransparency(50)
         #layer.setLayerColor
+
 
     def logOutcomes(self):
         log_t = (time.strftime("%H.%M.%S"))
@@ -445,8 +447,17 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.affected_people_output_2.clear()
         self.policemen_needed_output.clear()
         self.policemen_alarm_output.clear()
+        self.no_people_output.clear()
+        self.vulnerability_output.clear()
+        self.policemen_needed_output_2.clear()
+        self.building_type_output.clear()
+
 
     def closeEvent(self, event):
+
+        # empty the canvas
+        QgsMapLayerRegistry.instance().removeAllMapLayers()
+
         self.closingPlugin.emit()
         event.accept()
 
