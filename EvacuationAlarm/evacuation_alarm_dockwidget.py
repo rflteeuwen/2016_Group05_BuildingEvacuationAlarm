@@ -75,7 +75,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.affected_list = []
 
         # specific building data
-        self.iface.activeLayer().selectionChanged.connect(self.getSpecificInformation)
+        self.canvas.selectionChanged.connect(self.getSpecificInformation)
         self.canvas.setSelectionColor(QColor("Black"))
 
         # log and close
@@ -136,8 +136,8 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             for item in selected:
                 attrs = item.attributes()
 
-                people = attrs[22]
-                function = attrs[17]
+                people = attrs[5]
+                function = attrs[1]
 
                 funct_list = ["hospital", "doctors", "fire_station", "kindergarten", "nursing_home", "police", "school"]
 
@@ -238,7 +238,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         vl.startEditing()
 
         # Add fields
-        pr.addAttributes([QgsField("gid", QVariant.Int), QgsField("people", QVariant.Int)])
+        pr.addAttributes([QgsField("gid", QVariant.Int), QgsField("fclass", QVariant.String), QgsField("heightmedi", QVariant.Double), QgsField("stories", QVariant.Int), QgsField("floorarea", QVariant.Int), QgsField("people", QVariant.Int)])
 
         # Commit changes
         vl.commitChanges()
@@ -266,7 +266,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         qgis.utils.iface.legendInterface().refreshLayerSymbology(layer)
 
         # make regular buildings layer active again
-        QgsMapLayer = self.getLayer("Buildings")
+        QgsMapLayer = self.getLayer("subset_buildings")
         qgis.utils.iface.setActiveLayer(QgsMapLayer)
 
 

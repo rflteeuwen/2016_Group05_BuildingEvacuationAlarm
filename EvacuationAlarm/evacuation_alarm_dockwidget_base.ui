@@ -16,10 +16,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1106</width>
-     <height>1096</height>
+     <x>20</x>
+     <y>10</y>
+     <width>1098</width>
+     <height>1082</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -66,7 +66,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="horizontalLayout_13">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
@@ -96,6 +96,12 @@
           </item>
           <item>
            <widget class="QTextEdit" name="address_input">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>256</width>
@@ -107,45 +113,36 @@
          </layout>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="2" column="0">
-           <widget class="QSpinBox" name="intensityfire_input">
-            <property name="minimum">
-             <number>0</number>
-            </property>
-            <property name="maximum">
-             <number>3</number>
-            </property>
-            <property name="value">
-             <number>0</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="intensityfire">
-            <property name="text">
-             <string>Fire intensity</string>
-            </property>
-           </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="1" column="0">
+             <widget class="QLabel" name="intensityfire">
+              <property name="text">
+               <string>Fire intensity</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" alignment="Qt::AlignLeft">
+             <widget class="QSpinBox" name="intensityfire_input">
+              <property name="minimum">
+               <number>0</number>
+              </property>
+              <property name="maximum">
+               <number>3</number>
+              </property>
+              <property name="value">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="1" column="0" colspan="2">
-           <widget class="QLabel" name="fire_location_name_2">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Fire chemicals</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
+          <item row="1" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
              <widget class="QPushButton" name="chemicals_yes">
@@ -169,47 +166,64 @@
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_9">
-          <item>
-           <widget class="QLabel" name="winddirection">
+          <item row="0" column="0">
+           <widget class="QLabel" name="fire_location_name_2">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
             <property name="text">
-             <string>Wind direction</string>
+             <string>Fire chemicals</string>
             </property>
            </widget>
           </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
-           <widget class="QComboBox" name="winddirection_input">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="toolTip">
-             <string/>
-            </property>
-            <property name="accessibleName">
-             <string/>
-            </property>
-            <property name="editable">
-             <bool>false</bool>
-            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_9">
             <item>
-             <property name="text">
-              <string>North</string>
-             </property>
+             <widget class="QLabel" name="winddirection">
+              <property name="text">
+               <string>Wind direction</string>
+              </property>
+             </widget>
             </item>
             <item>
-             <property name="text">
-              <string>North-East</string>
-             </property>
+             <widget class="QComboBox" name="winddirection_input">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="accessibleName">
+               <string/>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>North</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>North-East</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>East</string>
+               </property>
+              </item>
+             </widget>
             </item>
-            <item>
-             <property name="text">
-              <string>East</string>
-             </property>
-            </item>
-           </widget>
+           </layout>
           </item>
          </layout>
         </item>
@@ -240,30 +254,27 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="calculate_header_4">
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>GENERAL INFORMATION: fill in information from incident message and perform calculation</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="affected_buildings_button">
-        <property name="text">
-         <string>Perform calculation</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="calculate_header_4">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>GENERAL INFORMATION: fill in information from incident message and perform calculation</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="affected_buildings_button">
+          <property name="text">
+           <string>Perform calculation</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <property name="leftMargin">
