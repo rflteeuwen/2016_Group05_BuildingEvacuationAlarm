@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="" version="2.14.6-Essen">
+<qgis projectname="" version="2.14.3-Essen">
   <title></title>
   <layer-tree-group expanded="1" checked="Qt::Checked" name="">
     <customproperties/>
@@ -20,16 +20,16 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>91331.07048822060460225</xmin>
-      <ymin>434370.90672313637332991</ymin>
-      <xmax>96492.20202399283880368</xmax>
-      <ymax>439474.77303385298000649</ymax>
+      <xmin>89925.30731039823149331</xmin>
+      <ymin>433927.61833451181882992</ymin>
+      <xmax>95086.43884617043659091</xmax>
+      <ymax>439031.48464522830909118</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
     <destinationsrs>
       <spatialrefsys>
-        <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.4171,50.3319,465.5524,-0.398957,0.343988,-1.87740,4.0725 +units=m +no_defs</proj4>
+        <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725 +units=m +no_defs</proj4>
         <srsid>2517</srsid>
         <srid>28992</srid>
         <authid>EPSG:28992</authid>
@@ -89,21 +89,15 @@
   </legend>
   <projectlayers>
     <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <extent>
-        <xmin>90887.55489090400806163</xmin>
-        <ymin>435292.64000000001396984</ymin>
-        <xmax>93923.50100000000384171</xmax>
-        <ymax>437905.73599999997531995</ymax>
-      </extent>
       <id>Buildings320170116113602163</id>
-      <datasource>../../../../../../../.qgis2/python/plugins/EvacuationAlarm/sample_data/smallBuildings_with_functions.shp</datasource>
+      <datasource>./smallBuildings_with_functions.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
       <layername>Buildings</layername>
       <srs>
         <spatialrefsys>
-          <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.4171,50.3319,465.5524,-0.398957,0.343988,-1.87740,4.0725 +units=m +no_defs</proj4>
+          <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725 +units=m +no_defs</proj4>
           <srsid>2517</srsid>
           <srid>28992</srid>
           <authid>EPSG:28992</authid>
@@ -1103,14 +1097,14 @@
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
+      <annotationform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
+      <editform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
+      <editforminitfilepath>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -1137,21 +1131,15 @@ def my_form_open(dialog, layer, feature):
       </conditionalstyles>
     </maplayer>
     <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Line" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <extent>
-        <xmin>90160.9391639450477669</xmin>
-        <ymin>435163.20300000201677904</ymin>
-        <xmax>94955.59829959525086451</xmax>
-        <ymax>438886.73063025617739186</ymax>
-      </extent>
       <id>clipped_spoor20161228135803969</id>
-      <datasource>../../../../../../../.qgis2/python/plugins/EvacuationAlarm/sample_data/clipped_spoor.shp</datasource>
+      <datasource>./clipped_spoor.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
       <layername>Railways</layername>
       <srs>
         <spatialrefsys>
-          <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.4171,50.3319,465.5524,-0.398957,0.343988,-1.87740,4.0725 +units=m +no_defs</proj4>
+          <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725 +units=m +no_defs</proj4>
           <srsid>2517</srsid>
           <srid>28992</srid>
           <authid>EPSG:28992</authid>
@@ -1435,14 +1423,14 @@ def my_form_open(dialog, layer, feature):
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="2" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
+      <annotationform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
+      <editform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
+      <editforminitfilepath>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -1469,21 +1457,15 @@ def my_form_open(dialog, layer, feature):
       </conditionalstyles>
     </maplayer>
     <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <extent>
-        <xmin>90072.46923183862236328</xmin>
-        <ymin>434436.5861735274665989</ymin>
-        <xmax>94935.52299999819661025</xmax>
-        <ymax>438879.84399999998277053</ymax>
-      </extent>
       <id>clipped_waterdeel20161228135714994</id>
-      <datasource>../../../../../../../.qgis2/python/plugins/EvacuationAlarm/sample_data/clipped_waterdeel.shp</datasource>
+      <datasource>./clipped_waterdeel.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
       <layername>Water</layername>
       <srs>
         <spatialrefsys>
-          <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.4171,50.3319,465.5524,-0.398957,0.343988,-1.87740,4.0725 +units=m +no_defs</proj4>
+          <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725 +units=m +no_defs</proj4>
           <srsid>2517</srsid>
           <srid>28992</srid>
           <authid>EPSG:28992</authid>
@@ -1763,14 +1745,14 @@ def my_form_open(dialog, layer, feature):
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
+      <annotationform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
+      <editform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
+      <editforminitfilepath>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -1797,21 +1779,15 @@ def my_form_open(dialog, layer, feature):
       </conditionalstyles>
     </maplayer>
     <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <extent>
-        <xmin>90048.19139458327845205</xmin>
-        <ymin>434049.13896095746895298</ymin>
-        <xmax>94963.55476198538963217</xmax>
-        <ymax>438909.96401878271717578</ymax>
-      </extent>
       <id>clipped_wegdeel20161228135423955</id>
-      <datasource>../../../../../../../.qgis2/python/plugins/EvacuationAlarm/sample_data/clipped_wegdeel.shp</datasource>
+      <datasource>./clipped_wegdeel.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
       <layername>Roads</layername>
       <srs>
         <spatialrefsys>
-          <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.4171,50.3319,465.5524,-0.398957,0.343988,-1.87740,4.0725 +units=m +no_defs</proj4>
+          <proj4>+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725 +units=m +no_defs</proj4>
           <srsid>2517</srsid>
           <srid>28992</srid>
           <authid>EPSG:28992</authid>
@@ -2115,14 +2091,14 @@ def my_form_open(dialog, layer, feature):
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
+      <annotationform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
+      <editform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
+      <editforminitfilepath>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is

@@ -3,7 +3,7 @@
   <title></title>
   <layer-tree-group expanded="1" checked="Qt::Checked" name="">
     <customproperties/>
-    <layer-tree-layer expanded="1" checked="Qt::Checked" id="Buildings320170116113602163" name="Buildings">
+    <layer-tree-layer expanded="0" checked="Qt::Checked" id="Buildings320170116113602163" name="Buildings">
       <customproperties/>
     </layer-tree-layer>
     <layer-tree-layer expanded="1" checked="Qt::Checked" id="clipped_wegdeel20161228135423955" name="Roads">
@@ -66,8 +66,8 @@
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Buildings" showFeatureCount="0">
-      <filegroup open="true" hidden="false">
+    <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="Buildings" showFeatureCount="0">
+      <filegroup open="false" hidden="false">
         <legendlayerfile isInOverview="0" layerid="Buildings320170116113602163" visible="1"/>
       </filegroup>
     </legendlayer>
@@ -88,7 +88,7 @@
     </legendlayer>
   </legend>
   <projectlayers>
-    <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+    <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>Buildings320170116113602163</id>
       <datasource>./smallBuildings_with_functions.shp</datasource>
       <keywordList>
@@ -186,17 +186,25 @@
           <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
         </edittype>
       </edittypes>
-      <renderer-v2 attr="fclass" forceraster="0" symbollevels="0" type="categorizedSymbol" enableorderby="0">
-        <categories>
-          <category render="true" symbol="0" value="" label=""/>
-          <category render="true" symbol="1" value="doctors" label="doctors"/>
-          <category render="true" symbol="2" value="fire_station" label="fire_station"/>
-          <category render="true" symbol="3" value="hospital" label="hospital"/>
-          <category render="true" symbol="4" value="kindergarten" label="kindergarten"/>
-          <category render="true" symbol="5" value="nursing_home" label="nursing_home"/>
-          <category render="true" symbol="6" value="police" label="police"/>
-          <category render="true" symbol="7" value="school" label="school"/>
-        </categories>
+      <renderer-v2 forceraster="0" symbollevels="0" type="RuleRenderer" enableorderby="0">
+        <rules key="{871c2d12-7741-4851-964e-fac5908c95c8}">
+          <rule scalemaxdenom="100000" filter="ELSE" key="{60af0709-d381-4ece-aa53-1b5987563a9c}" symbol="0" scalemindenom="10000"/>
+          <rule scalemaxdenom="100000" filter="&quot;fclass&quot; = 'doctors'" key="{3ac14471-c702-4dc0-a354-bafc901794f6}" symbol="1" scalemindenom="10000" label="doctors"/>
+          <rule scalemaxdenom="100000" filter="&quot;fclass&quot; = 'fire_station'" key="{21b451fc-af57-495c-9458-09401d5bb552}" symbol="2" scalemindenom="10000" label="fire_station"/>
+          <rule scalemaxdenom="100000" filter="&quot;fclass&quot; = 'hospital'" key="{72441c79-b48f-4dac-b036-da1f94a9f1ea}" symbol="3" scalemindenom="10000" label="hospital"/>
+          <rule scalemaxdenom="100000" filter="&quot;fclass&quot; = 'kindergarten'" key="{3e0034b3-23c3-4452-a843-588f2354afc9}" symbol="4" scalemindenom="10000" label="kindergarten"/>
+          <rule scalemaxdenom="100000" filter="&quot;fclass&quot; = 'nursing_home'" key="{dd255793-ba63-4bd0-8490-4601d6ecabe5}" symbol="5" scalemindenom="10000" label="nursing_home"/>
+          <rule scalemaxdenom="100000" filter="&quot;fclass&quot; = 'police'" key="{e9685a1f-1a29-4022-8a88-96a83f27c3a1}" symbol="6" scalemindenom="10000" label="police"/>
+          <rule scalemaxdenom="100000" filter="&quot;fclass&quot; = 'school'" key="{93f3697b-25c8-4da3-a998-b40ee8b640f6}" symbol="7" scalemindenom="10000" label="school"/>
+          <rule scalemaxdenom="10000" filter="&quot;fclass&quot; = 'school'" key="{a69803a4-6df6-4a49-9eea-3642f07e93b6}" symbol="8" scalemindenom="100" label="school"/>
+          <rule scalemaxdenom="10000" filter="&quot;fclass&quot; = 'police'" key="{e89f83ef-e8c9-4227-bb6b-502163b28d17}" symbol="9" scalemindenom="100" label="police"/>
+          <rule scalemaxdenom="10000" filter="&quot;fclass&quot; = 'nursing_home'" key="{a86b8eeb-3aee-4467-a2cc-d52abe33adca}" symbol="10" scalemindenom="100" label="nursing_home"/>
+          <rule scalemaxdenom="10000" filter="&quot;fclass&quot; = 'kindergarten'" key="{c10d8617-c4e1-4d49-bf52-6b2d7abc129f}" symbol="11" scalemindenom="100" label="kindergarten"/>
+          <rule scalemaxdenom="10000" filter="&quot;fclass&quot; = 'hospital'" key="{47d37139-f955-4fc3-ad39-8d28c8e8520f}" symbol="12" scalemindenom="100" label="hospital"/>
+          <rule scalemaxdenom="10000" filter="&quot;fclass&quot; = 'fire_station'" key="{0305921f-aaf9-4690-8196-8dccd2029610}" symbol="13" scalemindenom="100" label="fire_station"/>
+          <rule scalemaxdenom="10000" filter="&quot;fclass&quot; = 'doctors'" key="{c3b78ad4-de9e-4a98-96fd-6e73533effa4}" symbol="14" scalemindenom="100" label="doctors"/>
+          <rule scalemaxdenom="10000" filter="ELSE" key="{b58f167d-0113-4422-b343-3c70d19bb7ee}" symbol="15" scalemindenom="100"/>
+        </rules>
         <symbols>
           <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
             <layer pass="0" class="SimpleFill" locked="0">
@@ -206,7 +214,7 @@
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_color" v="0,0,0,0"/>
               <prop k="outline_style" v="solid"/>
               <prop k="outline_width" v="0.26"/>
               <prop k="outline_width_unit" v="MM"/>
@@ -221,7 +229,7 @@
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_color" v="0,0,0,0"/>
               <prop k="outline_style" v="solid"/>
               <prop k="outline_width" v="0.26"/>
               <prop k="outline_width_unit" v="MM"/>
@@ -262,7 +270,7 @@
               </symbol>
             </layer>
           </symbol>
-          <symbol alpha="1" clip_to_extent="1" type="fill" name="2">
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="10">
             <layer pass="0" class="SimpleFill" locked="0">
               <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="color" v="251,199,214,255"/>
@@ -271,6 +279,266 @@
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
               <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+            <layer pass="0" class="LinePatternFill" locked="0">
+              <prop k="angle" v="45"/>
+              <prop k="color" v="0,0,255,255"/>
+              <prop k="distance" v="1"/>
+              <prop k="distance_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="distance_unit" v="MM"/>
+              <prop k="line_width" v="0.26"/>
+              <prop k="line_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <symbol alpha="1" clip_to_extent="1" type="line" name="@10@1">
+                <layer pass="0" class="SimpleLine" locked="0">
+                  <prop k="capstyle" v="square"/>
+                  <prop k="customdash" v="5;2"/>
+                  <prop k="customdash_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="customdash_unit" v="MM"/>
+                  <prop k="draw_inside_polygon" v="0"/>
+                  <prop k="joinstyle" v="bevel"/>
+                  <prop k="line_color" v="0,0,0,255"/>
+                  <prop k="line_style" v="solid"/>
+                  <prop k="line_width" v="0.26"/>
+                  <prop k="line_width_unit" v="MM"/>
+                  <prop k="offset" v="0"/>
+                  <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="offset_unit" v="MM"/>
+                  <prop k="use_custom_dash" v="0"/>
+                  <prop k="width_map_unit_scale" v="0,0,0,0,0,0"/>
+                </layer>
+              </symbol>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="11">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="251,199,214,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+            <layer pass="0" class="LinePatternFill" locked="0">
+              <prop k="angle" v="45"/>
+              <prop k="color" v="0,0,255,255"/>
+              <prop k="distance" v="1"/>
+              <prop k="distance_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="distance_unit" v="MM"/>
+              <prop k="line_width" v="0.26"/>
+              <prop k="line_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <symbol alpha="1" clip_to_extent="1" type="line" name="@11@1">
+                <layer pass="0" class="SimpleLine" locked="0">
+                  <prop k="capstyle" v="square"/>
+                  <prop k="customdash" v="5;2"/>
+                  <prop k="customdash_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="customdash_unit" v="MM"/>
+                  <prop k="draw_inside_polygon" v="0"/>
+                  <prop k="joinstyle" v="bevel"/>
+                  <prop k="line_color" v="0,0,0,255"/>
+                  <prop k="line_style" v="solid"/>
+                  <prop k="line_width" v="0.26"/>
+                  <prop k="line_width_unit" v="MM"/>
+                  <prop k="offset" v="0"/>
+                  <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="offset_unit" v="MM"/>
+                  <prop k="use_custom_dash" v="0"/>
+                  <prop k="width_map_unit_scale" v="0,0,0,0,0,0"/>
+                </layer>
+              </symbol>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="12">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="251,199,214,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+            <layer pass="0" class="LinePatternFill" locked="0">
+              <prop k="angle" v="45"/>
+              <prop k="color" v="0,0,255,255"/>
+              <prop k="distance" v="1"/>
+              <prop k="distance_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="distance_unit" v="MM"/>
+              <prop k="line_width" v="0.26"/>
+              <prop k="line_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <symbol alpha="1" clip_to_extent="1" type="line" name="@12@1">
+                <layer pass="0" class="SimpleLine" locked="0">
+                  <prop k="capstyle" v="square"/>
+                  <prop k="customdash" v="5;2"/>
+                  <prop k="customdash_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="customdash_unit" v="MM"/>
+                  <prop k="draw_inside_polygon" v="0"/>
+                  <prop k="joinstyle" v="bevel"/>
+                  <prop k="line_color" v="0,0,0,255"/>
+                  <prop k="line_style" v="solid"/>
+                  <prop k="line_width" v="0.26"/>
+                  <prop k="line_width_unit" v="MM"/>
+                  <prop k="offset" v="0"/>
+                  <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="offset_unit" v="MM"/>
+                  <prop k="use_custom_dash" v="0"/>
+                  <prop k="width_map_unit_scale" v="0,0,0,0,0,0"/>
+                </layer>
+              </symbol>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="13">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="251,199,214,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+            <layer pass="0" class="LinePatternFill" locked="0">
+              <prop k="angle" v="45"/>
+              <prop k="color" v="0,0,255,255"/>
+              <prop k="distance" v="1"/>
+              <prop k="distance_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="distance_unit" v="MM"/>
+              <prop k="line_width" v="0.26"/>
+              <prop k="line_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <symbol alpha="1" clip_to_extent="1" type="line" name="@13@1">
+                <layer pass="0" class="SimpleLine" locked="0">
+                  <prop k="capstyle" v="square"/>
+                  <prop k="customdash" v="5;2"/>
+                  <prop k="customdash_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="customdash_unit" v="MM"/>
+                  <prop k="draw_inside_polygon" v="0"/>
+                  <prop k="joinstyle" v="bevel"/>
+                  <prop k="line_color" v="0,0,0,255"/>
+                  <prop k="line_style" v="solid"/>
+                  <prop k="line_width" v="0.26"/>
+                  <prop k="line_width_unit" v="MM"/>
+                  <prop k="offset" v="0"/>
+                  <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="offset_unit" v="MM"/>
+                  <prop k="use_custom_dash" v="0"/>
+                  <prop k="width_map_unit_scale" v="0,0,0,0,0,0"/>
+                </layer>
+              </symbol>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="14">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="251,199,214,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+            <layer pass="0" class="LinePatternFill" locked="0">
+              <prop k="angle" v="45"/>
+              <prop k="color" v="0,0,255,255"/>
+              <prop k="distance" v="1"/>
+              <prop k="distance_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="distance_unit" v="MM"/>
+              <prop k="line_width" v="0.26"/>
+              <prop k="line_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <symbol alpha="1" clip_to_extent="1" type="line" name="@14@1">
+                <layer pass="0" class="SimpleLine" locked="0">
+                  <prop k="capstyle" v="square"/>
+                  <prop k="customdash" v="5;2"/>
+                  <prop k="customdash_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="customdash_unit" v="MM"/>
+                  <prop k="draw_inside_polygon" v="0"/>
+                  <prop k="joinstyle" v="bevel"/>
+                  <prop k="line_color" v="0,0,0,255"/>
+                  <prop k="line_style" v="solid"/>
+                  <prop k="line_width" v="0.26"/>
+                  <prop k="line_width_unit" v="MM"/>
+                  <prop k="offset" v="0"/>
+                  <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="offset_unit" v="MM"/>
+                  <prop k="use_custom_dash" v="0"/>
+                  <prop k="width_map_unit_scale" v="0,0,0,0,0,0"/>
+                </layer>
+              </symbol>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="15">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="251,199,214,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="2">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="251,199,214,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,0"/>
               <prop k="outline_style" v="solid"/>
               <prop k="outline_width" v="0.26"/>
               <prop k="outline_width_unit" v="MM"/>
@@ -319,7 +587,7 @@
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_color" v="0,0,0,0"/>
               <prop k="outline_style" v="solid"/>
               <prop k="outline_width" v="0.26"/>
               <prop k="outline_width_unit" v="MM"/>
@@ -368,7 +636,7 @@
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_color" v="0,0,0,0"/>
               <prop k="outline_style" v="solid"/>
               <prop k="outline_width" v="0.26"/>
               <prop k="outline_width_unit" v="MM"/>
@@ -417,7 +685,7 @@
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_color" v="0,0,0,0"/>
               <prop k="outline_style" v="solid"/>
               <prop k="outline_width" v="0.26"/>
               <prop k="outline_width_unit" v="MM"/>
@@ -466,7 +734,7 @@
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_color" v="0,0,0,0"/>
               <prop k="outline_style" v="solid"/>
               <prop k="outline_width" v="0.26"/>
               <prop k="outline_width_unit" v="MM"/>
@@ -515,7 +783,7 @@
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_color" v="0,0,0,0"/>
               <prop k="outline_style" v="solid"/>
               <prop k="outline_width" v="0.26"/>
               <prop k="outline_width_unit" v="MM"/>
@@ -556,9 +824,7 @@
               </symbol>
             </layer>
           </symbol>
-        </symbols>
-        <source-symbol>
-          <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="8">
             <layer pass="0" class="SimpleFill" locked="0">
               <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="color" v="251,199,214,255"/>
@@ -586,7 +852,7 @@
               <prop k="offset_unit" v="MM"/>
               <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="outline_width_unit" v="MM"/>
-              <symbol alpha="1" clip_to_extent="1" type="line" name="@0@1">
+              <symbol alpha="1" clip_to_extent="1" type="line" name="@8@1">
                 <layer pass="0" class="SimpleLine" locked="0">
                   <prop k="capstyle" v="square"/>
                   <prop k="customdash" v="5;2"/>
@@ -607,9 +873,56 @@
               </symbol>
             </layer>
           </symbol>
-        </source-symbol>
-        <rotation/>
-        <sizescale scalemethod="diameter"/>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="9">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="251,199,214,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+            <layer pass="0" class="LinePatternFill" locked="0">
+              <prop k="angle" v="45"/>
+              <prop k="color" v="0,0,255,255"/>
+              <prop k="distance" v="1"/>
+              <prop k="distance_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="distance_unit" v="MM"/>
+              <prop k="line_width" v="0.26"/>
+              <prop k="line_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <symbol alpha="1" clip_to_extent="1" type="line" name="@9@1">
+                <layer pass="0" class="SimpleLine" locked="0">
+                  <prop k="capstyle" v="square"/>
+                  <prop k="customdash" v="5;2"/>
+                  <prop k="customdash_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="customdash_unit" v="MM"/>
+                  <prop k="draw_inside_polygon" v="0"/>
+                  <prop k="joinstyle" v="bevel"/>
+                  <prop k="line_color" v="0,0,0,255"/>
+                  <prop k="line_style" v="solid"/>
+                  <prop k="line_width" v="0.26"/>
+                  <prop k="line_width_unit" v="MM"/>
+                  <prop k="offset" v="0"/>
+                  <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+                  <prop k="offset_unit" v="MM"/>
+                  <prop k="use_custom_dash" v="0"/>
+                  <prop k="width_map_unit_scale" v="0,0,0,0,0,0"/>
+                </layer>
+              </symbol>
+            </layer>
+          </symbol>
+        </symbols>
       </renderer-v2>
       <labeling type="simple"/>
       <customproperties>
@@ -641,7 +954,7 @@
         <property key="labeling/fieldName" value=""/>
         <property key="labeling/fitInPolygonOnly" value="false"/>
         <property key="labeling/fontCapitals" value="0"/>
-        <property key="labeling/fontFamily" value=".SF NS Text"/>
+        <property key="labeling/fontFamily" value="MS Shell Dlg 2"/>
         <property key="labeling/fontItalic" value="false"/>
         <property key="labeling/fontLetterSpacing" value="0"/>
         <property key="labeling/fontLimitPixelSize" value="false"/>
@@ -668,7 +981,7 @@
         <property key="labeling/minFeatureSize" value="0"/>
         <property key="labeling/multilineAlign" value="0"/>
         <property key="labeling/multilineHeight" value="1"/>
-        <property key="labeling/namedStyle" value=""/>
+        <property key="labeling/namedStyle" value="Normal"/>
         <property key="labeling/obstacle" value="true"/>
         <property key="labeling/obstacleFactor" value="1"/>
         <property key="labeling/obstacleType" value="0"/>
@@ -778,20 +1091,20 @@
         <selectedonly on=""/>
       </labelattributes>
       <SingleCategoryDiagramRenderer diagramType="Pie">
-        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" minScaleDenominator="-4.65661e-10">
+        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" minScaleDenominator="0">
           <fontProperties description=".SF NS Text,13,-1,5,50,0,0,0,0,0" style=""/>
           <attribute field="" color="#000000" label=""/>
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
+      <annotationform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
+      <editform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
+      <editforminitfilepath>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -1110,14 +1423,14 @@ def my_form_open(dialog, layer, feature):
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="2" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
+      <annotationform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
+      <editform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
+      <editforminitfilepath>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -1432,14 +1745,14 @@ def my_form_open(dialog, layer, feature):
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
+      <annotationform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
+      <editform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
+      <editforminitfilepath>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -1778,14 +2091,14 @@ def my_form_open(dialog, layer, feature):
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
+      <annotationform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
+      <editform>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
+      <editforminitfilepath>/.qgis2/.qgis2/.qgis2/.qgis2/.qgis2/python/plugins/EvacuationAlarm/sample_data</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is

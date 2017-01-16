@@ -282,19 +282,13 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         layer = self.getLayer(name)
         features = layer.getFeatures()
 
+        pt = 0
         for item in features:
             attrs = item.attributes()
             if str(attrs[0]) == str(address):
                 pt = item.geometry().centroid().asPoint()
                 self.fire_location_output.setPlainText(str(pt))
-                return pt
-            else:
-                self.iface.messageBar().pushMessage(
-                    "This address could not be recognized, please change it",
-                    level=QgsMessageBar.INFO, duration=5)
-                self.deleteOldLayers()
-                return 0
-
+        return pt
 
 
     def currentLocation(self, scenario):
@@ -334,6 +328,11 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         current = self.currentLocation(scenario)
         next = self.buildingLocation()
         if next == 0:
+            print "hi"
+            self.iface.messageBar().pushMessage(
+                "This address could not be recognized, please change it",
+                level=QgsMessageBar.INFO, duration=5)
+            self.deleteOldLayers()
             return
         x0 = current[0]
         x1 = next[0]
