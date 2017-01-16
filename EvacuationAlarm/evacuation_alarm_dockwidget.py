@@ -247,7 +247,20 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                         ids.append(feature.id())
         return attributes, ids
     '''
+    def deleteOldLayers(self):
+        unwanted = ["plume1", "plume2", "plume3", "subset_buildings"]
+        layers = self.iface.legendInterface().layers()
+        for layer in layers:
+            if layer.name() in unwanted:
+                QgsMapLayerRegistry.instance().removeMapLayer(layer.id())
 
+
+
+
+
+
+
+        #QgsMapLayerRegistry.instance().removeMapLayer(vl.id())
 
     def make_extra_layer(self,feature_list):
 
@@ -422,20 +435,24 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         layer = self.getLayer("Buildings")
         qgis.utils.iface.setActiveLayer(layer)
 
-        # Color buildings
+        '''# Color buildings
         symbols = layer.rendererV2().symbols()
         symbol = symbols[0]
         symbol.setColor(QtGui.QColor.fromRgb(255, 153, 153))
 
         # Refrest canvas and layer symbology (color)
         qgis.utils.iface.mapCanvas().refresh()
-        qgis.utils.iface.legendInterface().refreshLayerSymbology(layer)
+        qgis.utils.iface.legendInterface().refreshLayerSymbology(layer)'''
 
         # zoom full extent
         self.canvas.zoomToFullExtent()
 
 
     def loadPlume(self, plume):
+
+        if self.getLayer("subset_buildings"):
+            self.deleteOldLayers()
+
         plugin_dir = os.path.dirname(__file__)
         plume_shape = plugin_dir + '/sample_data/plumes/'+ str(plume) + '.shp'
         layer = self.iface.addVectorLayer(plume_shape, str(plume), "ogr")
