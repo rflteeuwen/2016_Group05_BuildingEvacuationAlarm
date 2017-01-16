@@ -127,10 +127,15 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def getSpecificInformation(self):
 
         layer = self.iface.activeLayer()
+        check_layer = self.getLayer("subset_buildings")
         selected = layer.selectedFeatures()
 
         if len(selected) > 1:
-            self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.CRITICAL, duration = 5)
+            self.iface.messageBar().pushMessage("Error", "Please select only one building at a time",
+                                                level=QgsMessageBar.CRITICAL, duration = 6)
+        if layer != check_layer:
+            self.iface.messageBar().pushMessage("Error", "Please make layer subset_buildings active again in the legend and select your building from there",
+                                                level=QgsMessageBar.CRITICAL, duration=6)
         else:
 
             for item in selected:
