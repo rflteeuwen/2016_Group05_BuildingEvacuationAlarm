@@ -267,6 +267,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # create new temporary layer
         vl = QgsVectorLayer("Polygon?crs=epsg:28992", "subset_buildings", "memory")
         pr = vl.dataProvider()
+        vl.setLayerTransparency(50)
             
         # Enter editing mode
         vl.startEditing()
