@@ -31,7 +31,7 @@ from qgis.core import *
 from qgis.gui import *
 from PyQt4.QtCore import *
 from PyQt4 import QtGui
-from PyQt4.QtGui import QLineEdit
+from PyQt4.QtGui import QLineEdit, QColor
 import os, sys
 import qgis
 
@@ -76,6 +76,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # specific building data
         self.iface.activeLayer().selectionChanged.connect(self.getSpecificInformation)
+        self.canvas.setSelectionColor(QColor("Red"))
 
         # log and close
         self.log_close.clicked.connect(self.logOutcomes)
@@ -89,17 +90,17 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         d = (time.strftime("%d/%m/%Y"))
 
         incident1 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
-                    "Smoke does not contain chemicals. Fire intensity is low. \n" \
-                    "Wind intensity is medium and to North East direction. \n" \
+                    "Fire intensity is low. Smoke does not contain chemicals. \n" \
+                    "Wind blows to the North-East with medium intensity. \n" \
                     "Decide on evacuation procedure within 15 minutes." % (str(d), str(t), str(random_address))
         incident2 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
-                    "Smoke does not contain chemicals. Fire intensity is high. \n" \
-                    "Wind intensity is low and to East direction. \n" \
-                    "Decide on evacuation procedure within 15 minutes." % (str(d), str(t), str(random_address))
+                    "Fire intensity is medium. Smoke does not contain chemicals. \n" \
+                    "Wind blows to the East with low intensity. \n" \
+                    "Decide on evacuation procedure within 10 minutes." % (str(d), str(t), str(random_address))
         incident3 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
-                    "Smoke does contain chemicals. Fire intensity is high. \n" \
-                    "Wind intensity is high and to North direction. \n" \
-                    "Decide on evacuation procedure within 15 minutes." % (str(d), str(t), str(random_address))
+                    "Fire intensity is high. Smoke does contain chemicals. \n" \
+                    "Wind blows to the North with high intensity. \n" \
+                    "Decide on evacuation procedure within 5 minutes." % (str(d), str(t), str(random_address))
         incident_list = [incident1, incident2, incident3]
 
         message = random.choice(incident_list)
@@ -234,13 +235,15 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             
         # Enter editing mode
         vl.startEditing()
-        pr.addFeatures(feature_list)
 
         # Add fields
-        pr.addAttributes([QgsField("gid", QVariant.Int)])
+        pr.addAttributes([QgsField("gid", QVariant.Int), QgsField("people", QVariant.Int)])
 
         # Commit changes
         vl.commitChanges()
+
+        # Add features
+        pr.addFeatures(feature_list)
 
         # update layer's extent when new features have been added
         # because change of extent in provider is not propagated to the layer
@@ -248,6 +251,18 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # add layer to the legend
         QgsMapLayerRegistry.instance().addMapLayer(vl)
+
+        # color layer
+        layer = self.getLayer("subset_buildings")
+        symbols = layer.rendererV2().symbols()
+        symbol = symbols[0]
+        symbol.setColor(QtGui.QColor.fromRgb(255,99,71))
+
+        # to do: color interesting buildings darker? but then the attributes need to be fixed first
+
+        # Refresh both canvas and layer symbology (color)
+        qgis.utils.iface.mapCanvas().refresh()
+        qgis.utils.iface.legendInterface().refreshLayerSymbology(layer)
 
         # make regular buildings layer active again
         QgsMapLayer = self.getLayer("Buildings")
@@ -387,7 +402,16 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         plume_shape = plugin_dir + '/sample_data/plumes/'+ str(plume) + '.shp'
         layer = self.iface.addVectorLayer(plume_shape, str(plume), "ogr")
         layer.setLayerTransparency(50)
-        #layer.setLayerColor
+
+        # Color plume grey
+        symbols = layer.rendererV2().symbols()
+        symbol = symbols[0]
+        symbol.setColor(QtGui.QColor.fromRgb(105,105,105))
+        layer.setLayerTransparency(50)
+
+        # Refrest canvas and layer symbology (color)
+        qgis.utils.iface.mapCanvas().refresh()
+        qgis.utils.iface.legendInterface().refreshLayerSymbology(layer)
 
 
     def logOutcomes(self):
