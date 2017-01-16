@@ -147,7 +147,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 "Please select only one building",
                 level=QgsMessageBar.INFO, duration=5)
             self.deselectAll()
-        elif layer != check_layer:
+        elif (layer != check_layer) and self.getLayer("subset_buildings"):
             self.iface.messageBar().pushMessage(
                 "Please make the subset_buildings layer active again and select from there",
                 level=QgsMessageBar.INFO, duration=5)
@@ -415,15 +415,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         layer = self.getLayer("Buildings")
         qgis.utils.iface.setActiveLayer(layer)
 
-        '''# Color buildings
-        symbols = layer.rendererV2().symbols()
-        symbol = symbols[0]
-        symbol.setColor(QtGui.QColor.fromRgb(255, 153, 153))
-
-        # Refrest canvas and layer symbology (color)
-        qgis.utils.iface.mapCanvas().refresh()
-        qgis.utils.iface.legendInterface().refreshLayerSymbology(layer)'''
-
         # zoom full extent
         self.canvas.zoomToFullExtent()
 
@@ -482,7 +473,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         f.close
 
         self.iface.messageBar().pushMessage(
-            "A log file was created in your plugin directory 'log_files' (C:\Users\username\.qgis2\python\plugins\EvacuationAlarm). You can now load a new project or close the plugin.",
+            "A log file was created in your plugin directory 'log_files' (For Windows users C:\Users\username\.qgis2\python\plugins\EvacuationAlarm, for MAC users Macintosh/HD\Users\username\.qgis2\python\plugins\EvacuationAlarm). You can now load a new project or close the plugin.",
             level=QgsMessageBar.SUCCESS)
 
         self.refreshPlugin()
