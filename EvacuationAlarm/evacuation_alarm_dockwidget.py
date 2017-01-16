@@ -86,21 +86,22 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def loadIncident(self):
         random_address = self.findAddresses()
 
-        t = (time.strftime("%H:%M:%S"))
-        d = (time.strftime("%d/%m/%Y"))
+        future_5 = time.time() + 300
+        future_10 = time.time() + 600
+        future_15 = time.time() + 900
 
-        incident1 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
+        incident1 = "%s : Fire at address %s causing dangerous smoke. \n" \
                     "Fire intensity is low. Smoke does not contain chemicals. \n" \
                     "Wind blows to the North-East with medium intensity. \n" \
-                    "Decide on evacuation procedure within 15 minutes." % (str(d), str(t), str(random_address))
-        incident2 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
+                    "Decide on evacuation procedure before %s (within 15 minutes)." % (time.ctime(), str(random_address), time.ctime(future_15))
+        incident2 = "%s : Fire at address %s causing dangerous smoke. \n" \
                     "Fire intensity is medium. Smoke does not contain chemicals. \n" \
                     "Wind blows to the East with low intensity. \n" \
-                    "Decide on evacuation procedure within 10 minutes." % (str(d), str(t), str(random_address))
-        incident3 = "%s, %s: Fire at address %s causing dangerous smoke. \n" \
+                    "Decide on evacuation procedure before %s (within 10 minutes)." % (time.ctime(), str(random_address), time.ctime(future_10))
+        incident3 = "%s : Fire at address %s causing dangerous smoke. \n" \
                     "Fire intensity is high. Smoke does contain chemicals. \n" \
                     "Wind blows to the North with high intensity. \n" \
-                    "Decide on evacuation procedure within 5 minutes." % (str(d), str(t), str(random_address))
+                    "Decide on evacuation procedure before %s (within 5 minutes)." % (time.ctime(), str(random_address), time.ctime(future_5))
         incident_list = [incident1, incident2, incident3]
 
         message = random.choice(incident_list)
