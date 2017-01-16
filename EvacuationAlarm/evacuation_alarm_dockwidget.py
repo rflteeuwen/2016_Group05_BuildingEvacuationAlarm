@@ -225,28 +225,8 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             if append:
                 features.append(feat)
         return features
-    '''
-    def getFieldValues(self, layer, fieldname, null=True, selection=False):
-        attributes = []
-        ids = []
-        if fieldExists(layer, fieldname):
-            if selection:
-                features = layer.selectedFeatures()
-            else:
-                request = QgsFeatureRequest().setSubsetOfAttributes([getFieldIndex(layer, fieldname)])
-                features = layer.getFeatures(request)
-            if null:
-                for feature in features:
-                    attributes.append(feature.attribute(fieldname))
-                    ids.append(feature.id())
-            else:
-                for feature in features:
-                    val = feature.attribute(fieldname)
-                    if val != NULL:
-                        attributes.append(val)
-                        ids.append(feature.id())
-        return attributes, ids
-    '''
+
+
     def deleteOldLayers(self):
         unwanted = ["plume1", "plume2", "plume3", "subset_buildings"]
         layers = self.iface.legendInterface().layers()
@@ -254,13 +234,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             if layer.name() in unwanted:
                 QgsMapLayerRegistry.instance().removeMapLayer(layer.id())
 
-
-
-
-
-
-
-        #QgsMapLayerRegistry.instance().removeMapLayer(vl.id())
 
     def make_extra_layer(self,feature_list):
 
@@ -294,8 +267,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         symbol = symbols[0]
         symbol.setColor(QtGui.QColor.fromRgb(255,51,51))
 
-        # to do: color interesting buildings darker? but then the attributes need to be fixed first
-
         # Refresh both canvas and layer symbology (color)
         qgis.utils.iface.mapCanvas().refresh()
         qgis.utils.iface.legendInterface().refreshLayerSymbology(layer)
@@ -317,6 +288,13 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 pt = item.geometry().centroid().asPoint()
                 self.fire_location_output.setPlainText(str(pt))
                 return pt
+            else:
+                self.iface.messageBar().pushMessage(
+                    "This address could not be recognized, please change it",
+                    level=QgsMessageBar.INFO, duration=5)
+                self.deleteOldLayers()
+                return 0
+
 
 
     def currentLocation(self, scenario):
@@ -355,6 +333,8 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # define dx and dy to move
         current = self.currentLocation(scenario)
         next = self.buildingLocation()
+        if next == 0:
+            return
         x0 = current[0]
         x1 = next[0]
         y0 = current[1]
