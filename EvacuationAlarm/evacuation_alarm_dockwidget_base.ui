@@ -148,13 +148,13 @@
         <item row="1" column="1">
          <widget class="QSpinBox" name="intensityfire_input">
           <property name="minimum">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="maximum">
            <number>3</number>
           </property>
           <property name="value">
-           <number>0</number>
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -175,13 +175,13 @@
         <item row="3" column="2" alignment="Qt::AlignTop">
          <widget class="QSpinBox" name="windintensity_input">
           <property name="minimum">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="maximum">
            <number>3</number>
           </property>
           <property name="value">
-           <number>0</number>
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -239,7 +239,7 @@
         <item row="3" column="0">
          <widget class="QSpinBox" name="nr_policeman_input">
           <property name="maximum">
-           <number>100000</number>
+           <number>1000</number>
           </property>
          </widget>
         </item>
