@@ -76,7 +76,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # specific building data
         self.iface.activeLayer().selectionChanged.connect(self.getSpecificInformation)
-        self.canvas.setSelectionColor(QColor("Red"))
+        self.canvas.setSelectionColor(QColor("Black"))
 
         # log and close
         self.log_close.clicked.connect(self.logOutcomes)
