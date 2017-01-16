@@ -34,6 +34,7 @@ from PyQt4 import QtGui
 from PyQt4.QtGui import QLineEdit, QColor
 import os, sys
 import qgis
+import webbrowser
 
 from qgis.networkanalysis import *
 from pyspatialite import dbapi2 as sqlite
@@ -66,6 +67,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # initialization
         self.loadProject()
+        self.wiki_button.clicked.connect(self.openinBrowser)
 
         # incident
         self.load_incident.clicked.connect(self.loadIncident)
@@ -121,6 +123,10 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         random_address = random.choice(address_list)
 
         return random_address
+
+
+    def openinBrowser(self):
+        webbrowser.open('https://github.com/rflteeuwen/2016_Group05_BuildingEvacuationAlarm/wiki', new=2)
 
 
     def deselectAll(self):
