@@ -76,7 +76,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # specific building data
         self.canvas.selectionChanged.connect(self.getSpecificInformation)
-        self.canvas.setSelectionColor(QColor("Black"))
 
         # log and close
         self.log_close.clicked.connect(self.logOutcomes)
@@ -124,6 +123,13 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         return random_address
 
 
+    def deselectAll(self):
+        for a in self.iface.attributesToolBar().actions():
+            if a.objectName() == 'mActionDeselectAll':
+                a.trigger()
+                break
+
+
     def getSpecificInformation(self):
 
         layer = self.iface.activeLayer()
@@ -131,11 +137,11 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         selected = layer.selectedFeatures()
 
         if len(selected) > 1:
-            self.iface.messageBar().pushMessage("Error", "Please select only one building at a time",
-                                                level=QgsMessageBar.CRITICAL, duration = 6)
-        if layer != check_layer:
-            self.iface.messageBar().pushMessage("Error", "Please make layer subset_buildings active again in the legend and select your building from there",
-                                                level=QgsMessageBar.CRITICAL, duration=6)
+            #self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.INFO, duration=3)
+            self.deselectAll()
+        elif layer != check_layer:
+            #self.iface.messageBar().pushMessage("Error", "Please make layer subset_buildings active again in the legend and select your building from there", level=QgsMessageBar.INFO, duration=3)
+            self.deselectAll()
         else:
 
             for item in selected:
@@ -148,11 +154,11 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
                 if function in funct_list:
                     vulnerability = "Vulnerable!"
-                    policemen = int(people / 25)
+                    policemen = people / 30
                 else:
                     function = "Not of particular interest"
                     vulnerability = "Not vulnerable"
-                    policemen = int(people / 50)
+                    policemen = people / 120
 
                 if policemen < 1:
                     policemen = 1
@@ -262,7 +268,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         layer = self.getLayer("subset_buildings")
         symbols = layer.rendererV2().symbols()
         symbol = symbols[0]
-        symbol.setColor(QtGui.QColor.fromRgb(255,99,71))
+        symbol.setColor(QtGui.QColor.fromRgb(255,51,51))
 
         # to do: color interesting buildings darker? but then the attributes need to be fixed first
 
@@ -315,9 +321,10 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 scenario = scenario_dict[wind_direction][wind_intensity]
             else:
                 self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.CRITICAL, duration=6)
+                return
         else:
             self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.CRITICAL, duration=6)
-
+            return
         # load the correct plume_layer
         self.loadPlume(scenario)
 
@@ -354,22 +361,29 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.affected_people_output_2.setPlainText(str(affected_people))
 
         # call police force calculation function right away
-        self.police_force_calc()
+        self.police_force_calc(scenario, affected_people)
 
 
-    def police_force_calc(self):
+    def police_force_calc(self, scenario, affected_people):
 
-        affected_people = self.affected_people_output_2.toPlainText()
-        policemen_needed = int(affected_people) / 10
+        #affected_people = self.affected_people_output_2.toPlainText()
 
+        if scenario == "plume1":
+            policemen_needed = affected_people / 240
+        elif scenario == "plume2":
+            policemen_needed = affected_people / 120
+        else:
+            policemen_needed = int(affected_people) / 60
+
+        if policemen_needed < 2:
+            policemen_needed = 2
         self.policemen_needed_output.setPlainText(str(policemen_needed))
 
         policemen_available = int(self.nr_policeman_input.text())
         if policemen_available < policemen_needed:
-            self.policemen_alarm_output.setHtml("Warning: Not enough policemen available")
-
+            self.policemen_alarm_output.setHtml("WARNING: Not enough policemen available")
         else:
-            self.policemen_alarm_output.setHtml("There are enough policemen available")
+            self.policemen_alarm_output.setHtml("Enough policemen available")
 
 
     def loadProject(self):
@@ -395,9 +409,17 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # set Buildings layers to active layer
         layers = qgis.utils.iface.legendInterface().layers()
-        QgsMapLayer = layers[0]
-        QgsMapLayer = self.getLayer("Buildings")
-        qgis.utils.iface.setActiveLayer(QgsMapLayer)
+        layer = self.getLayer("Buildings")
+        qgis.utils.iface.setActiveLayer(layer)
+
+        # Color buildings
+        symbols = layer.rendererV2().symbols()
+        symbol = symbols[0]
+        symbol.setColor(QtGui.QColor.fromRgb(255, 153, 153))
+
+        # Refrest canvas and layer symbology (color)
+        qgis.utils.iface.mapCanvas().refresh()
+        qgis.utils.iface.legendInterface().refreshLayerSymbology(layer)
 
         # zoom full extent
         self.canvas.zoomToFullExtent()
@@ -407,7 +429,6 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         plugin_dir = os.path.dirname(__file__)
         plume_shape = plugin_dir + '/sample_data/plumes/'+ str(plume) + '.shp'
         layer = self.iface.addVectorLayer(plume_shape, str(plume), "ogr")
-        layer.setLayerTransparency(50)
 
         # Color plume grey
         symbols = layer.rendererV2().symbols()
@@ -454,7 +475,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         f.close
 
         self.iface.messageBar().pushMessage(
-            "A log file was created in your plugin directory 'log_files' (C:\Users\username\.qgis2\python\plugins\EvacuationAlarm)",
+            "A log file was created in your plugin directory 'log_files' (C:\Users\username\.qgis2\python\plugins\EvacuationAlarm). You can now load a new project or close the plugin.",
             level=QgsMessageBar.SUCCESS)
 
         self.refreshPlugin()
