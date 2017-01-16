@@ -143,10 +143,14 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         selected = layer.selectedFeatures()
 
         if len(selected) > 1:
-            #self.iface.messageBar().pushMessage("Error", "Please select only one building at a time", level=QgsMessageBar.INFO, duration=3)
+            self.iface.messageBar().pushMessage(
+                "Please select only one building",
+                level=QgsMessageBar.INFO, duration=5)
             self.deselectAll()
         elif layer != check_layer:
-            #self.iface.messageBar().pushMessage("Error", "Please make layer subset_buildings active again in the legend and select your building from there", level=QgsMessageBar.INFO, duration=3)
+            self.iface.messageBar().pushMessage(
+                "Please make the subset_buildings layer active again and select from there",
+                level=QgsMessageBar.INFO, duration=5)
             self.deselectAll()
         else:
 
@@ -326,10 +330,10 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             if wind_intensity in scenario_dict[wind_direction]:
                 scenario = scenario_dict[wind_direction][wind_intensity]
             else:
-                self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.CRITICAL, duration=6)
+                self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.INFO, duration=5)
                 return
         else:
-            self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.CRITICAL, duration=6)
+            self.iface.messageBar().pushMessage("Scenario not available: selected combination of wind direction and wind intensity are not linked to a predefined scenario",level=QgsMessageBar.INFO, duration=5)
             return
         # load the correct plume_layer
         self.loadPlume(scenario)
