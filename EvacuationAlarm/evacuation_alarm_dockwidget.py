@@ -67,10 +67,10 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # initialization
         self.loadProject()
-        self.wiki_button.clicked.connect(self.openinBrowser)
+        self.wiki_button_2.clicked.connect(self.openinBrowser)
 
         # incident
-        self.load_incident.clicked.connect(self.loadIncident)
+        self.load_incident_2.clicked.connect(self.loadIncident)
 
         # calculations
         self.affected_buildings_button.clicked.connect(self.affected_buildings_calc)
@@ -107,7 +107,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         message = random.choice(incident_list)
 
-        self.incident_info.setText(message)
+        self.incident_info_2.setText(message)
 
 
     def findAddresses(self):
@@ -173,10 +173,10 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
                 if policemen < 1:
                     policemen = 1
 
-                self.no_people_output.setPlainText(str(people))
-                self.vulnerability_output.setPlainText(vulnerability)
-                self.policemen_needed_output_2.setPlainText(str(policemen))
-                self.building_type_output.setPlainText(str(function))
+                self.no_people_output_2.setPlainText(str(people))
+                self.vulnerability_output_2.setPlainText(vulnerability)
+                self.policemen_needed_output_4.setPlainText(str(policemen))
+                self.building_type_output_2.setPlainText(str(function))
 
 
     def getLayer(self, name):
@@ -278,7 +278,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def buildingLocation(self):
         name = "Buildings"
-        address = self.address_input.toPlainText()
+        address = self.address_input_2.toPlainText()
         layer = self.getLayer(name)
         features = layer.getFeatures()
 
@@ -287,7 +287,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             attrs = item.attributes()
             if str(attrs[0]) == str(address):
                 pt = item.geometry().centroid().asPoint()
-                self.fire_location_output.setPlainText(str(pt))
+                self.fire_location_output_2.setPlainText(str(pt))
         return pt
 
 
@@ -308,8 +308,8 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         scenario_dict = {'North': {3: 'plume3'}, 'North-East': {2: 'plume1'}, 'East': {1: 'plume2'}}
 
         # read in the values specified by the user
-        wind_direction = str(self.winddirection_input.currentText())
-        wind_intensity = int(self.windintensity_input.value())
+        wind_direction = str(self.winddirection_input_2.currentText())
+        wind_intensity = int(self.windintensity_input_2.value())
 
         # check which scenario is applicable
         if wind_direction in scenario_dict:
@@ -360,8 +360,8 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             affected_people += int(building['people'])
 
         # output
-        self.affected_buildings_output.setPlainText(str(number_of_affected_buildings))
-        self.affected_people_output_2.setPlainText(str(affected_people))
+        self.affected_buildings_output_2.setPlainText(str(number_of_affected_buildings))
+        self.affected_people_output_3.setPlainText(str(affected_people))
 
         # call police force calculation function right away
         self.police_force_calc(scenario, affected_people)
@@ -369,7 +369,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def police_force_calc(self, scenario, affected_people):
 
-        #affected_people = self.affected_people_output_2.toPlainText()
+        #affected_people = self.affected_people_output_3.toPlainText()
 
         if scenario == "plume1":
             policemen_needed = affected_people / 240
@@ -382,11 +382,11 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
             policemen_needed = 2
         self.policemen_needed_output.setPlainText(str(policemen_needed))
 
-        policemen_available = int(self.nr_policeman_input.text())
+        policemen_available = int(self.nr_policeman_input_2.text())
         if policemen_available < policemen_needed:
-            self.policemen_alarm_output.setHtml("WARNING: Not enough policemen available")
+            self.policemen_alarm_output_2.setHtml("WARNING: Not enough policemen available")
         else:
-            self.policemen_alarm_output.setHtml("Enough policemen available")
+            self.policemen_alarm_output_2.setHtml("Enough policemen available")
 
 
     def loadProject(self):
@@ -449,13 +449,13 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         file_dir = folder_dir + name
 
         header1 = "This log file was created on date %s at time %s \n \n" % (log_d, log_t)
-        message = "Incident message: \n" + self.incident_info.toPlainText() + "\n \n"
+        message = "Incident message: \n" + self.incident_info_2.toPlainText() + "\n \n"
         header2 = "The plugin calculated the following evacuation information: \n"
-        fire_coords = "The fire is in building with coordinates: " + self.fire_location_output.toPlainText() + "\n"
-        affected_buildings = "The number of buildings affected by smoke is: " + self.affected_buildings_output.toPlainText() + "\n"
-        affected_people = "The estimated number of people in these buildings is: " + self.affected_people_output_2.toPlainText() + "\n"
+        fire_coords = "The fire is in building with coordinates: " + self.fire_location_output_2.toPlainText() + "\n"
+        affected_buildings = "The number of buildings affected by smoke is: " + self.affected_buildings_output_2.toPlainText() + "\n"
+        affected_people = "The estimated number of people in these buildings is: " + self.affected_people_output_3.toPlainText() + "\n"
         policemen = "The number of policemen needed to evacuate these people is: " + self.policemen_needed_output.toPlainText() + "\n"
-        alarm = self.policemen_alarm_output.toPlainText() + "\n \n"
+        alarm = self.policemen_alarm_output_2.toPlainText() + "\n \n"
         header3 = "The affected buildings are the buildings with addresses: \n"
 
         log_text = header1 + message + header2 + fire_coords + affected_buildings + affected_people + policemen + alarm + header3
@@ -484,22 +484,22 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.loadProject()
 
         # clear input fields
-        self.nr_policeman_input.clear()
-        self.address_input.clear()
-        self.intensityfire_input.clear()
-        self.windintensity_input.clear()
+        self.nr_policeman_input_2.clear()
+        self.address_input_2.clear()
+        self.intensityfire_input_2.clear()
+        self.windintensity_input_2.clear()
 
         # clear output fields
-        self.incident_info.clear()
-        self.fire_location_output.clear()
-        self.affected_buildings_output.clear()
-        self.affected_people_output_2.clear()
+        self.incident_info_2.clear()
+        self.fire_location_output_2.clear()
+        self.affected_buildings_output_2.clear()
+        self.affected_people_output_3.clear()
         self.policemen_needed_output.clear()
-        self.policemen_alarm_output.clear()
-        self.no_people_output.clear()
-        self.vulnerability_output.clear()
-        self.policemen_needed_output_2.clear()
-        self.building_type_output.clear()
+        self.policemen_alarm_output_2.clear()
+        self.no_people_output_2.clear()
+        self.vulnerability_output_2.clear()
+        self.policemen_needed_output_4.clear()
+        self.building_type_output_2.clear()
 
 
     def closeEvent(self, event):
