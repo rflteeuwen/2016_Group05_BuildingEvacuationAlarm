@@ -403,7 +403,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         # not updated US6SP10M files from ENC_ROOT
         plugin_dir = os.path.dirname(__file__)
-        source_dir = plugin_dir + '/sample_data/backgroundDataProject.qgs'
+        source_dir = plugin_dir + '/sample_data/finalProject.qgs'
         shape = plugin_dir + '/sample_data/plumes/plume1.shp'
 
         # read project
