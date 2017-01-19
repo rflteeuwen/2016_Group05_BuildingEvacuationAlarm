@@ -380,7 +380,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         if policemen_needed < 2:
             policemen_needed = 2
-        self.policemen_needed_output.setPlainText(str(policemen_needed))
+        self.policemen_needed_output_3.setPlainText(str(policemen_needed))
 
         policemen_available = int(self.nr_policeman_input_2.text())
         if policemen_available < policemen_needed:
@@ -454,7 +454,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         fire_coords = "The fire is in building with coordinates: " + self.fire_location_output_2.toPlainText() + "\n"
         affected_buildings = "The number of buildings affected by smoke is: " + self.affected_buildings_output_2.toPlainText() + "\n"
         affected_people = "The estimated number of people in these buildings is: " + self.affected_people_output_3.toPlainText() + "\n"
-        policemen = "The number of policemen needed to evacuate these people is: " + self.policemen_needed_output.toPlainText() + "\n"
+        policemen = "The number of policemen needed to evacuate these people is: " + self.policemen_needed_output_3.toPlainText() + "\n"
         alarm = self.policemen_alarm_output_2.toPlainText() + "\n \n"
         header3 = "The affected buildings are the buildings with addresses: \n"
 
@@ -494,7 +494,7 @@ class EvacuationAlarmDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.fire_location_output_2.clear()
         self.affected_buildings_output_2.clear()
         self.affected_people_output_3.clear()
-        self.policemen_needed_output.clear()
+        self.policemen_needed_output_3.clear()
         self.policemen_alarm_output_2.clear()
         self.no_people_output_2.clear()
         self.vulnerability_output_2.clear()
